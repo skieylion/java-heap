@@ -4,8 +4,8 @@ public class AdapterMessenger implements Messenger {
 
     private final MessengerXml messengerXml;
 
-    public AdapterMessenger(MessengerXml messengerXml) {
-        this.messengerXml = messengerXml;
+    public AdapterMessenger() {
+        this.messengerXml = new MessengerXml();
     }
 
     private String jsonToXml(String jsonData) {
