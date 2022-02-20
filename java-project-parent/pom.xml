@@ -11,6 +11,7 @@
     <module>soap-server</module>
     <module>soap-client</module>
       <module>decorator</module>
+      <module>adapter</module>
   </modules>
 
   <name>java-project-parent</name>
