@@ -6,17 +6,15 @@ package project.java;
  */
 public class App 
 {
-    public static void main( String[] args ) throws Test {
-        //IllegalAccessException exception;
-        throw new Test("asd");
-        //System.out.println( "Hello World!" );
-//        try {
-//            NullPointerException e = new NullPointerException("up level");
-//            e.initCause(new ArithmeticException("a reason"));
-//            throw e;
-//        } catch (NullPointerException e) {
-//            System.out.println("the exception is "+e);
-//            System.out.println("the reason is "+e.getCause());
-//        }
+    public static void main( String[] args )
+    {
+        System.out.println("---------------1----------------------");
+        Project project1=new RealProject("http://google.com");
+        System.out.println("---");
+        project1.run();
+        System.out.println("---------------2----------------------");
+        Project project2=new ProxyProject("http://google.com");
+        System.out.println("---");
+        project2.run();
     }
 }
