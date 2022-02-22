@@ -5,6 +5,8 @@ public class Cat extends Animal {
     private Integer age;
     private int medal;
 
+    private C c;
+
     class X {
         X() {
             System.out.println(medal);
