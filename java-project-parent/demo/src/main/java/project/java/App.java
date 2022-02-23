@@ -1,13 +1,13 @@
 package project.java;
 
 
-import java.awt.event.KeyEvent;
-import java.io.Console;
 import java.io.IOException;
-import java.math.BigDecimal;
-import java.util.*;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
+
+import static java.lang.Math.pow;
+import static java.lang.System.out;
+import static java.lang.Math.PI;
+
+
 
 class A {
     public void print() {
@@ -22,15 +22,8 @@ class A {
 class B extends A {
 
     public void print() {
-        System.out.println("B");
-    }
-}
-
-class C {
-    public static void Test(String... args) {
-        for (String arg : args) {
-            System.out.println(arg);
-        }
+        System.out.println("B"+PI);
+        double y=pow(1d,2d);
     }
 }
 
@@ -85,30 +78,123 @@ enum TestEnum {
     public static void foo() {
         System.out.println("static foo");
     }
+
+
 }
+
+class D {
+    public String name;
+}
+
+class C {
+    public static void Test(String... args) {
+        for (String arg : args) {
+            System.out.println(arg);
+        }
+    }
+
+    public void tw(D d) {
+        //d = new D();
+        d.name = "fromC";
+    }
+}
+
+
+class K {
+    public static int v1 = 4;
+
+    public static int v2=f2();
+
+    static {
+        System.out.println("Статический блок");
+    }
+
+    {
+        System.out.println("Блок");
+    }
+
+    K(){
+        System.out.println("Конструктор");
+    }
+
+    K(int x) {
+        this();
+        System.out.println("Конструктор с аргументом");
+    }
+
+    private static int f2(){
+        System.out.println("Статическая функция");
+        return 10;
+    }
+
+
+
+
+}
+
+class C1 {
+    public int x=1;
+    C1(int z) {
+        out.println("C1");
+    }
+}
+
+class C2 extends C1 {
+    C2(int z) {
+        super(1);
+        out.println("C2");
+    }
+}
+
+
+
+
 
 public class App {
     public static void main(String[] args) throws IOException {
+        //C2 c2=new C2(1);
 
-        //одномерные массивы
-        int[] arr1=new int[2];
-        int arr2[]=new int[3];
-        int[] arr3=new int[]{1,2,3};
-        int[] arr4=new int[0];
-        int[] arr5=new int[]{};
-        int[] arr6=Arrays.copyOf(arr3,1);
-        Integer[] arr7=(Integer[]) Arrays.stream(arr3).boxed().toArray(Integer[]::new);
-        Arrays.sort(arr7,(var a,var b)->b-a);
-        Arrays.stream(arr7).forEach(System.out::println);
+        C2[] arrC2=new C2[10];
+        C1[] arrC1=arrC2;
+        arrC1[0]=new C1(2);
 
-        //многомерные массивы
-        double[][] tab1=new double[3][3];
-        double tab2[][];
-        double[][] tab3;
-        double[][] tab4=new double[][]{
-                {1,2,1,2,2},
-                {2,3,34,4,5}
-        };
+//        K k=new K(1);
+//        out.println();
+//        D d = new D();
+//        d.name = "fromApp";
+//        C c = new C();
+//        c.tw(d);
+//        System.out.println(d.name);
+//        K k=new K();
+//        System.out.println("");
+//        System.out.printf("%d \t %d",k.v1,k.v2);
+//        K k2=new K();
+//        System.out.println("");
+//        System.out.printf("%d",k2.v2);
+        //даты
+//        Date date = new Date();
+//        LocalDate localDate = LocalDate.now();
+//        System.out.printf("%th", localDate);
+
+//        //одномерные массивы
+//        int[] arr1=new int[2];
+//        int arr2[]=new int[3];
+//        int[] arr3=new int[]{1,2,3};
+//        int[] arr4=new int[0];
+//        int[] arr5=new int[]{};
+//        int[] arr6=Arrays.copyOf(arr3,1);
+//        Integer[] arr7=(Integer[]) Arrays.stream(arr3).boxed().toArray(Integer[]::new);
+//        Arrays.sort(arr7,(var a,var b)->b-a);
+//        Arrays.stream(arr7).forEach(System.out::println);
+//
+//        //многомерные массивы
+//        double[][] tab1=new double[3][3];
+//        double tab2[][];
+//        double[][] tab3;
+//        double[][] tab4=new double[][]{
+//                {1,2,1,2,2},
+//                {2,3,34,4,5}
+//        };
 
         //Arrays.stream(arr3).forEach();
 
