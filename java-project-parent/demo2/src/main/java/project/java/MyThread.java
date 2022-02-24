@@ -28,21 +28,17 @@ public class MyThread implements Runnable {
     private void sum2() {
         synchronized (arr) {
             arr.add(arr.get(arr.size() - 1) + 1);
-        }
-    }
-
-    @Override
-    public void run() {
-        try {
-            for (int i = 0; i < 10; i++) {
-                sum2();
-                Thread.sleep(100);
+        }{
+            try {
+                for (int i = 0; i < 10; i++) {
+                    sum2();
+                    Thread.sleep(100);
+                }
+                System.out.println("arr =>");
+                System.out.println(arr);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
-            System.out.println("arr =>");
-            System.out.println(arr);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
 
 //        System.out.println(name + " start");
 //        do {
@@ -56,5 +52,9 @@ public class MyThread implements Runnable {
 //        stop=true;
 //
 //        System.out.println(name + " end");
+        }
     }
+
+    @Override
+    public void run()
 }
