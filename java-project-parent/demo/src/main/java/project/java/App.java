@@ -1,12 +1,20 @@
 package project.java;
 
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.stream.Stream;
 
-import static java.lang.Math.pow;
+import static java.lang.Math.*;
 import static java.lang.System.out;
-import static java.lang.Math.PI;
-
 
 
 class A {
@@ -22,8 +30,8 @@ class A {
 class B extends A {
 
     public void print() {
-        System.out.println("B"+PI);
-        double y=pow(1d,2d);
+        System.out.println("B" + PI);
+        double y = pow(1d, 2d);
     }
 }
 
@@ -82,6 +90,11 @@ enum TestEnum {
 
 }
 
+class YY<T> {
+
+}
+
+
 class D {
     public String name;
 }
@@ -103,7 +116,7 @@ class C {
 class K {
     public static int v1 = 4;
 
-    public static int v2=f2();
+    public static int v2 = f2();
 
     static {
         System.out.println("Статический блок");
@@ -113,7 +126,7 @@ class K {
         System.out.println("Блок");
     }
 
-    K(){
+    K() {
         System.out.println("Конструктор");
     }
 
@@ -122,18 +135,17 @@ class K {
         System.out.println("Конструктор с аргументом");
     }
 
-    private static int f2(){
+    private static int f2() {
         System.out.println("Статическая функция");
         return 10;
     }
 
 
-
-
 }
 
 class C1 {
-    public int x=1;
+    public int x = 1;
+
     C1(int z) {
         out.println("C1");
     }
@@ -146,17 +158,130 @@ class C2 extends C1 {
     }
 }
 
+class C3 {
+    //    void f(float x) {
+//        out.println("float");
+//    }
+//
+//    void f(double x) {
+//        out.println("double");
+//    }
+    void f(byte x) {
+        out.println("byte");
+    }
+//    void f(int x) {
+//        out.println("int");
+//    }
+
+//    void f(long x) {
+//        out.println("long");
+//    }
+}
+
+class C4 extends C3 {
+    void f(byte x) {
+
+    }
+}
+
+class C5 {
+//    public void notify() {
+//
+//    }
+}
+
+class C6 {
+
+    C6() {
+        out.println("C6 ::");
+    }
+
+    public C6(String s) {
+        out.println("C6 ::");
+    }
+
+    public static boolean test(Predicate<Integer> p, Integer v) {
+        return p.test(v);
+    }
+
+    public static <T> void test2(Consumer<T> action, T v) {
+        action.accept(v);
+    }
+
+    public static <T> void test3(Runnable runnable) {
+        runnable.run();
+    }
 
 
+}
 
 
 public class App {
-    public static void main(String[] args) throws IOException {
+
+    private static final Logger logger = Logger.getLogger(App.class.getName());
+
+    static {
+        logger.setLevel(Level.FINER);
+        logger.getParent().setLevel(Level.FINER);
+    }
+
+    public static void main(String[] args) {
+        Arrays.stream(new String[]{"1","sad"}).map(C6::new).forEach(out::println);
+        Arrays.stream(new String[]{"1","sad"}).toArray(C6[]::new);
+        //C6.test3(C6::new);
+//        C6.test2(out::println, "sad");
+//
+//        //log.setLevel(Level.ALL);
+//        Arrays.sort(new String[]{"a", "s", "f"}, String::compareToIgnoreCase);
+//        logger.info(String.valueOf(C6.test((e) -> true, 1)));
+//        Arrays.stream(new String[]{"a", "sd"}).forEach(out::println);
+//        logger.finest("asdasdasd123123");
+        //log.info("INFO");
+        //log.fine("FINE");
+        //Arrays.stream(new String[]{"a","sd"}).map(String[]::new).forEach();
+
+        //log.log(Level.INFO,"FINE");
+        //log.logp(Level.INFO,"ASD","asd","asd");
+        //logger.info(logger.getLevel().getName());
+        logger.setLevel(Level.FINER);
+        logger.setLevel(Level.FINER);
+        logger.throwing(App.class.getName(), App.class.getMethods()[0].getName(), new ArithmeticException());
+
+        // YY<TestEnum> x=new YY<>();
+
+
+//        C3 c31 = new C3();
+//        C3 c3 = new C4();
+//        C4 c4 = new C4();
+//
+//        if (c31 instanceof C4) {
+//            C4 c4new = (C4) c31;
+//        }
+
+
+//        ArrayList<Integer> list=new ArrayList<>();
+//
+//        out.println(c3.getClass().getName());
+//
+//        Object obj;
+//        Integer i1=128;
+//        Integer i2=128;
+//        Byte b1=100;
+//        Byte b2=100;
+//        out.println(i1==i2);
+//        out.println(b1==b2);
+//        C3 c3=new C3();
+//        long a=5;
+//        float b=2.0f;
+//        byte t=0xA;
+//        c3.f((byte)0xA);
+
         //C2 c2=new C2(1);
 
-        C2[] arrC2=new C2[10];
-        C1[] arrC1=arrC2;
-        arrC1[0]=new C1(2);
+//ArrayStoreException
+//        C2[] arrC2=new C2[10];
+//        C1[] arrC1=arrC2;
+//        arrC1[0]=new C1(2);
 
 //        K k=new K(1);
 //        out.println();
