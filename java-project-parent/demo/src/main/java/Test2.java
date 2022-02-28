@@ -1,4 +1,4 @@
-import project3.java3.TestProtected;
+import project.java.TestProtected;
 
 public class Test2 extends TestProtected{
     Test2() {
