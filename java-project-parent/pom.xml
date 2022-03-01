@@ -20,6 +20,7 @@
       <module>demo4</module>
       <module>demomodule1</module>
     <module>demomodule2</module>
+      <module>spring-security</module>
   </modules>
 
   <name>java-project-parent</name>
