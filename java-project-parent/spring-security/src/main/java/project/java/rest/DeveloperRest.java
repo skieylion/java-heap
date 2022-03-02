@@ -1,9 +1,6 @@
 package project.java.rest;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import project.java.model.Developer;
 
 import java.util.List;
@@ -28,5 +25,16 @@ public class DeveloperRest {
     @GetMapping("/{id}")
     public Developer getById(@PathVariable("id") Long id) {
         return developerList.stream().filter((developer -> developer.getId().equals(id))).findFirst().orElse(null);
+    }
+
+    @PostMapping
+    public Developer create(@RequestBody Developer developer) {
+        developerList.add(developer);
+        return developer;
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteById(@PathVariable Long id) {
+        developerList.removeIf(developer -> developer.getId().equals(id));
     }
 }
