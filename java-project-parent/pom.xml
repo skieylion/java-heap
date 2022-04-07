@@ -21,6 +21,7 @@
       <module>demomodule1</module>
     <module>demomodule2</module>
       <module>spring-security</module>
+      <module>feign</module>
   </modules>
 
   <name>java-project-parent</name>
