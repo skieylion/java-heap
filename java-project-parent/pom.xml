@@ -22,6 +22,7 @@
     <module>demomodule2</module>
       <module>spring-security</module>
       <module>feign</module>
+      <module>hystrix</module>
   </modules>
 
   <name>java-project-parent</name>
