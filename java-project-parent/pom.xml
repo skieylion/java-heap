@@ -19,10 +19,11 @@
       <module>demo3</module>
       <module>demo4</module>
       <module>demomodule1</module>
-    <module>demomodule2</module>
+      <module>demomodule2</module>
       <module>spring-security</module>
       <module>feign</module>
       <module>hystrix</module>
+    <module>hibernate1</module>
   </modules>
 
   <name>java-project-parent</name>

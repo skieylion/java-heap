@@ -1,0 +1,1 @@
+insert into MESSAGE (ID,NAME) values (1, 'Алексей Максимович Пешков');
