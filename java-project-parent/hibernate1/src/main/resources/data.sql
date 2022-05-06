@@ -1,1 +1,5 @@
-insert into MESSAGE (ID,NAME) values (1, 'Алексей Максимович Пешков');
+CREATE TABLE PERSON(
+    ID BIGINT PRIMARY KEY auto_increment,
+    FIRST_NAME VARCHAR(255),
+    LAST_NAME VARCHAR(255)
+);
