@@ -1,5 +1,6 @@
 package project.java;
 
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.h2.tools.Console;
 import org.hibernate.Session;
@@ -14,12 +15,24 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  * Hello world!
  */
 public class App {
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) throws SQLException, InterruptedException {
+        Runnable runnable=new Runnable() {
+            @SneakyThrows
+            @Override
+            public void run() {
+                Console.main();
+            }
+        };
+        runnable.run();
+
+
+
         EntityManagerFactory emf= Persistence.createEntityManagerFactory("Persistence");
         EntityManager em=emf.createEntityManager();
 
@@ -31,7 +44,18 @@ public class App {
         System.out.println(person.getId());
         em.getTransaction().commit();
         em.close();
-        Console.main();
+
+        Thread.sleep(10000);
+        
+        EntityManager em1=emf.createEntityManager();
+        em1.getTransaction().begin();
+        List<Person> personList=em1.createQuery("select p from Person p").getResultList();
+        personList.get(0).setFirstName("Иннокентий");
+
+        Thread.sleep(15000);
+
+        em1.getTransaction().commit();
+        em1.close();
     }
 
     private static SessionFactory createSessionFactory() {
