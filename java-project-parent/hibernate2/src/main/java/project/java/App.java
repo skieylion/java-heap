@@ -45,15 +45,10 @@ public class App {
         em.getTransaction().commit();
         em.close();
 
-        Thread.sleep(10000);
-        
         EntityManager em1=emf.createEntityManager();
         em1.getTransaction().begin();
         List<Person> personList=em1.createQuery("select p from Person p").getResultList();
         personList.get(0).setFirstName("Иннокентий");
-
-        Thread.sleep(15000);
-
         em1.getTransaction().commit();
         em1.close();
     }
