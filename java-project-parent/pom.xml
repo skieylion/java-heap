@@ -26,6 +26,7 @@
       <module>hibernate1</module>
       <module>adapter2</module>
       <module>hibernate2</module>
+      <module>proxy2</module>
   </modules>
 
   <name>java-project-parent</name>
