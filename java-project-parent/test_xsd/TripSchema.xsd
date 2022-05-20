@@ -1,0 +1,58 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+            jaxb:version="2.1">
+
+    <xsd:complexType name="list">
+        <xsd:sequence>
+            <xsd:element name="rec" type="TripRec" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="TripRec">
+        <xsd:sequence>
+            <xsd:element name="requestExternalId" type="xsd:string"/>
+            <xsd:element name="status" type="xsd:int"/>
+            <xsd:element name="req_auto_card" type="xsd:int"/>
+            <xsd:element name="req_pid" type="xsd:int"/>
+            <xsd:element name="req_fio" type="xsd:string"/>
+            <xsd:element name="mis_auto_card" type="xsd:int"/>
+            <xsd:element name="mis_pid" type="xsd:int"/>
+            <xsd:element name="mis_fio" type="xsd:string"/>
+            <xsd:element name="mis_code_appoint" type="xsd:int"/>
+            <xsd:element name="mis_name_appoint" type="xsd:string"/>
+            <xsd:element name="mis_struct_code" type="xsd:int"/>
+            <xsd:element name="mis_RHR" type="xsd:string"/>
+            <xsd:element name="Code_mission" type="xsd:int"/>
+            <xsd:element name="dateDismissal" type="xsd:int"/>
+            <xsd:element name="beg_date_miss" type="xsd:date"/>
+            <xsd:element name="end_data_miss" type="xsd:date"/>
+            <xsd:element name="text_miss" type="xsd:string"/>
+            <xsd:element name="beg_date_event" type="xsd:date"/>
+            <xsd:element name="end_data_event" type="xsd:date"/>
+            <xsd:element name="summ_dd" type="xsd:double"/>
+            <xsd:element name="card_avanse" type="xsd:int"/>
+            <xsd:element name="summa_ticket_avanse" type="xsd:double"/>
+            <xsd:element name="class_ticket" type="xsd:string"/>
+            <xsd:element name="summa_avanse_living" type="xsd:double"/>
+            <xsd:element name="international" type="xsd:int"/>
+            <xsd:element name="str" type="TripStr" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="TripStr">
+        <xsd:sequence>
+            <xsd:element name="country_departure" type="xsd:string"/>
+            <xsd:element name="place_departure" type="xsd:string"/>
+            <xsd:element name="country_destination" type="xsd:string"/>
+            <xsd:element name="place_destination" type="xsd:string"/>
+            <xsd:element name="date_out" type="xsd:date"/>
+            <xsd:element name="target_mission" type="xsd:string"/>
+            <xsd:element name="kontragent" type="xsd:string"/>
+            <xsd:element name="osnovanie" type="xsd:string"/>
+            <xsd:element name="osnovanie_live" type="xsd:string"/>
+            <xsd:element name="doc_osnovanie_live" type="xsd:string"/>
+            <xsd:element name="ticket_osnovanie" type="xsd:string"/>
+            <xsd:element name="doc_ticket_osnovanie" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+</xsd:schema>

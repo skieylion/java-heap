@@ -27,6 +27,9 @@
       <module>adapter2</module>
       <module>hibernate2</module>
       <module>proxy2</module>
+      <module>opencv</module>
+      <module>test_xsd</module>
+      <module>chain_of_responsibility</module>
   </modules>
 
   <name>java-project-parent</name>
