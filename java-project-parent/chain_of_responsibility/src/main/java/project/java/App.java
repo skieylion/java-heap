@@ -6,7 +6,7 @@ package project.java;
 public class App {
     public static void main(String[] args) {
 
-        FilterAppartmentAbstract filterCountRoom = new FilterAppartmentAbstract() {
+        FilterAppartment filterCountRoom = new FilterAppartmentAbstract() {
             @Override
             public boolean filter(AppartmentData appartmentData) {
                 System.out.println("count_room");
