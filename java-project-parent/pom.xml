@@ -30,6 +30,9 @@
       <module>opencv</module>
       <module>test_xsd</module>
       <module>chain_of_responsibility</module>
+      <module>hibernate_3</module>
+    <module>hibernate3</module>
+      <module>factory_method</module>
   </modules>
 
   <name>java-project-parent</name>
