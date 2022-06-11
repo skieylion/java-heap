@@ -24,10 +24,15 @@ import java.util.List;
  * Hello world!
  */
 public class App {
+
+    int testX = 3;
+
     private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy H:m:s");
 
     public static void main(String[] args) throws IOException {
-        run11();
+        run14();
+        //run13();
+        //run11();
         //run10();
         //run9();
         //run8();
@@ -38,9 +43,45 @@ public class App {
         //run3();
     }
 
+    static void run14() {
+        int a = 2, b = 4;
+        if (a < b)
+            if (b == 4) System.out.println("a<b,b=4");
+            else System.out.println("a<b, b!=4");
+        else System.out.println("a>=b");
+
+        do a++; while (a < b);
+
+        //System.out.println(++a);
+    }
+
+    static void run13() {
+        int f = 42;
+        String s = (f < 43) ? "life" : (++f > 50) ? "universe" : "everything";
+        System.out.println(s);
+        System.out.println(f);
+    }
+
+    void go1() {
+        int testX;
+        go2(3 / 0);
+    }
+
+    static void go2(int y) {
+        int testX = ++y;
+        System.out.println(testX);
+    }
+
+
+    private static void run12() {
+        byte a = (byte) 0b1111_1000;
+        byte b = (byte) (a >> 1);
+        System.out.println(!true);
+    }
+
     private static void run11() {
-        int x=4;
-        char s='\241';
+        int x = 4;
+        char s = '\241';
     }
 
     private static void run10() {

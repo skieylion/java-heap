@@ -3,9 +3,8 @@ package project.java;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CargoFactoryFactory implements CargoFactory {
+public class CargoFactoryFactory {
 
-    private final CargoFactory cargoFactory;
     private static final Map<String, CargoFactory> factoryMap = new HashMap<>();
 
     static {
@@ -13,16 +12,7 @@ public class CargoFactoryFactory implements CargoFactory {
         factoryMap.put("CargoStore", new CargoStoreFactory());
     }
 
-    public CargoFactoryFactory(CargoFactory cargoFactory) {
-        this.cargoFactory = cargoFactory;
-    }
-
-    public static CargoFactoryFactory createFactory(String type) {
-        return new CargoFactoryFactory(factoryMap.get(type));
-    }
-
-    @Override
-    public Cargo createCargo(String body) {
-        return cargoFactory.createCargo(body);
+    public static CargoFactory createFactory(String type) {
+        return factoryMap.get(type);
     }
 }

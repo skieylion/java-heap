@@ -33,6 +33,8 @@
       <module>hibernate_3</module>
     <module>hibernate3</module>
       <module>factory_method</module>
+    <module>heap_app</module>
+    <module>abstract_factory</module>
   </modules>
 
   <name>java-project-parent</name>

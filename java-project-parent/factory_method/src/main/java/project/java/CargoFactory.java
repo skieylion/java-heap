@@ -1,5 +1,5 @@
 package project.java;
 
-public interface CargoFactory {
-    Cargo createCargo(String body);
+public abstract class CargoFactory {
+    public abstract Cargo createCargo(String body);
 }

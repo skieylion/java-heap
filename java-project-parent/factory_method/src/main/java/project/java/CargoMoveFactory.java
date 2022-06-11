@@ -1,6 +1,6 @@
 package project.java;
 
-public class CargoMoveFactory implements CargoFactory {
+public class CargoMoveFactory extends CargoFactory {
 
     @Override
     public Cargo createCargo(String body) {

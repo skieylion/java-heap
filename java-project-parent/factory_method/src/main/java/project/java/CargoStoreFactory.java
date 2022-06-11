@@ -1,6 +1,6 @@
 package project.java;
 
-public class CargoStoreFactory implements CargoFactory {
+public class CargoStoreFactory extends CargoFactory {
     @Override
     public Cargo createCargo(String body) {
         //..преобразование xml -> object
