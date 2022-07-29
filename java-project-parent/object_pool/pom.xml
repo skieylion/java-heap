@@ -9,10 +9,10 @@
     <groupId>project.java</groupId>
     <version>1.0-SNAPSHOT</version>
   </parent>
-  <artifactId>heap_app</artifactId>
+  <artifactId>object_pool</artifactId>
   <version>1.0-SNAPSHOT</version>
 
-  <name>heap_app</name>
+  <name>object_pool</name>
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
 
@@ -30,5 +30,4 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
-
 </project>

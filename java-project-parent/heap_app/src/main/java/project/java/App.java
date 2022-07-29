@@ -1,21 +1,23 @@
 package project.java;
 
-/**
- * Hello world!
- */
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+
 public class App {
 
-    public static void main(String[] args) {
-        int z=8;
-        switch (z){
-            case 1:
-                System.out.println("Fall to one");
-            default:
-                System.out.println("default");
-            case 3:
-                System.out.println("Fall to three");
-            case 4:
-                System.out.println("Fall to four");
-        }
+    @MyAnno(str = "asd", val = 1)
+    public static void myMeth() {
+
     }
+
+    public static void main(String[] args) {
+
+    }
+}
+
+@Retention(RetentionPolicy.RUNTIME)
+@interface MyAnno {
+    String str();
+
+    int val();
 }

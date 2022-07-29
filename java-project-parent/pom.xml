@@ -35,6 +35,11 @@
       <module>factory_method</module>
     <module>heap_app</module>
     <module>abstract_factory</module>
+      <module>decorator2</module>
+      <module>builder</module>
+      <module>prototype</module>
+      <module>singleton</module>
+      <module>object_pool</module>
   </modules>
 
   <name>java-project-parent</name>
