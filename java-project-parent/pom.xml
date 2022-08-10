@@ -40,6 +40,9 @@
       <module>prototype</module>
       <module>singleton</module>
       <module>object_pool</module>
+      <module>filter</module>
+      <module>iterator</module>
+      <module>bridge</module>
   </modules>
 
   <name>java-project-parent</name>

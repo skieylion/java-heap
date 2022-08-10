@@ -4,9 +4,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Hello world!
- */
 public class App {
 
     private static void log(String str) {
