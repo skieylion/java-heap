@@ -1,35 +1,36 @@
 package project.java;
 
 
-
 public class App {
-
-    static void test(AppI obj) {
-        System.out.println("AppI");
-    }
-
-    static void test(AppTest obj) {
-        System.out.println("AppTest");
-    }
-
-    static void test(App obj) {
-        System.out.println("App");
-    }
-
     public static void main(String[] args) {
-        App obj=new AppTest2();
-        test(obj);
+        //Gen<Integer> ob1 = new Gen<Integer>(88);
+        Gen2 ob2 = new Gen2("asd");
+        //ob1.getObj();
+        ob2.getObj();
     }
 }
 
-interface AppI {
+class Gen<T> {
+    T obj;
 
+    Gen(T obj) {
+        this.obj = obj;
+    }
+
+    T getObj() {
+        System.out.println("Gen");
+        return obj;
+    }
 }
 
-class AppTest extends App implements AppI {
+class Gen2 extends Gen<String> {
 
-}
+    Gen2(String obj) {
+        super(obj);
+    }
 
-class AppTest2 extends App implements AppI {
-
+    String getObj() {
+        System.out.println("Gen2");
+        return obj;
+    }
 }
