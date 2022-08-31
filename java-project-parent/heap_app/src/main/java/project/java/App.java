@@ -1,36 +1,22 @@
 package project.java;
 
-
+interface MyNumber<T> {
+    boolean func(T t1, T t2);
+}
+class AppDemo {
+    static <T> boolean equal(T t1, T t2) {
+        return t1 == t2;
+    }
+}
 public class App {
     public static void main(String[] args) {
-        //Gen<Integer> ob1 = new Gen<Integer>(88);
-        Gen2 ob2 = new Gen2("asd");
-        //ob1.getObj();
-        ob2.getObj();
+        System.out.println(compare(AppDemo::<String>equal, "aa", "dd"));
+        System.out.println(compare(AppDemo::<Integer>equal, 1, 1));
+    }
+
+    static <T> boolean compare(MyNumber<T> myNumber, T t1, T t2) {
+        return myNumber.func(t1, t2);
     }
 }
 
-class Gen<T> {
-    T obj;
 
-    Gen(T obj) {
-        this.obj = obj;
-    }
-
-    T getObj() {
-        System.out.println("Gen");
-        return obj;
-    }
-}
-
-class Gen2 extends Gen<String> {
-
-    Gen2(String obj) {
-        super(obj);
-    }
-
-    String getObj() {
-        System.out.println("Gen2");
-        return obj;
-    }
-}

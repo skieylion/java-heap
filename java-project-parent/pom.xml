@@ -46,6 +46,8 @@
       <module>facade</module>
       <module>command</module>
       <module>snapshot</module>
+      <module>state</module>
+      <module>strategy</module>
   </modules>
 
   <name>java-project-parent</name>
