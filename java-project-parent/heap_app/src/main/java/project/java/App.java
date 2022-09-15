@@ -1,22 +1,46 @@
 package project.java;
 
-interface MyNumber<T> {
-    boolean func(T t1, T t2);
-}
-class AppDemo {
-    static <T> boolean equal(T t1, T t2) {
-        return t1 == t2;
-    }
-}
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Getter;
+
+import java.util.*;
+import java.util.stream.Collectors;
+
+
 public class App {
     public static void main(String[] args) {
-        System.out.println(compare(AppDemo::<String>equal, "aa", "dd"));
-        System.out.println(compare(AppDemo::<Integer>equal, 1, 1));
-    }
 
-    static <T> boolean compare(MyNumber<T> myNumber, T t1, T t2) {
-        return myNumber.func(t1, t2);
+        User user1 = new User(1L, "Иванов", "Директор");
+        User user2 = new User(1L, "Иванов2", "Директор");
+        User user3 = new User(1L, "Иванов3", "Директор");
+        List<User> users = Optional.of(Arrays.asList(new UserTask(user1), new UserTask(null), new UserTask(user3))).orElse(new ArrayList<>()).stream()
+                .map(UserTask::getAssignee)
+                .filter(Objects::nonNull)
+                .filter(user -> Objects.nonNull(user.getFullName()))
+                .filter(user -> Objects.nonNull(user.getPosition()))
+                .collect(ArrayList::new, (userList, user) -> {
+                    userList.stream()
+                            .filter(u -> Objects.equals(user.getId(), u.getId()))
+                            .findFirst()
+                            .ifPresent(userList::remove);
+                    userList.add(user);
+                }, ArrayList::addAll);
+        System.out.println(users);
     }
 }
 
 
+@Data
+@AllArgsConstructor
+class User {
+    Long id;
+    String fullName;
+    String position;
+}
+
+@Data
+@AllArgsConstructor
+class UserTask {
+    User assignee;
+}

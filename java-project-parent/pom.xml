@@ -30,7 +30,6 @@
       <module>opencv</module>
       <module>test_xsd</module>
       <module>chain_of_responsibility</module>
-      <module>hibernate_3</module>
     <module>hibernate3</module>
       <module>factory_method</module>
     <module>heap_app</module>
@@ -48,7 +47,16 @@
       <module>snapshot</module>
       <module>state</module>
       <module>strategy</module>
+    <module>demolesson</module>
+    <module>modulelesson1</module>
+    <module>modulelesson2</module>
+      <module>modulelesson3</module>
+      <module>modulelesson4</module>
   </modules>
+    <properties>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+    </properties>
 
   <name>java-project-parent</name>
 

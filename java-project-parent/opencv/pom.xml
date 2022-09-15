@@ -42,7 +42,7 @@
         <configuration>
           <archive>
             <manifest>
-              <mainClass>project.java.App</mainClass>
+              <mainClass>package1.App</mainClass>
             </manifest>
           </archive>
           <descriptorRefs>
@@ -67,7 +67,7 @@
             <manifest>
               <addClasspath>true</addClasspath>
               <classpathPrefix></classpathPrefix>
-              <mainClass>project.java.App</mainClass>
+              <mainClass>package1.App</mainClass>
             </manifest>
           </archive>
         </configuration>
