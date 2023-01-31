@@ -28,5 +28,6 @@ public class App {
         Thread t2 = new Thread(runnable, "t2");
         t1.start();
         t2.start();
+        //Добавили комментарий
     }
 }
