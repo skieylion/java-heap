@@ -21,6 +21,7 @@ public class App {
             }
             sleep();
         }
+        //Добавили комментарий для test2
     };
 
     public static void main(String[] args) throws InterruptedException {
