@@ -31,5 +31,6 @@ public class App {
         t2.start();
         //Добавили комментарий
         //Добавим комментарий для test1
+        //add comments
     }
 }
