@@ -52,6 +52,7 @@
     <module>modulelesson2</module>
       <module>modulelesson3</module>
       <module>modulelesson4</module>
+      <module>thread-life-cycle</module>
   </modules>
     <properties>
         <maven.compiler.source>11</maven.compiler.source>

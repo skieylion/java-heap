@@ -1,46 +1,32 @@
 package project.java;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-
-import java.util.*;
-import java.util.stream.Collectors;
-
-
 public class App {
-    public static void main(String[] args) {
 
-        User user1 = new User(1L, "Иванов", "Директор");
-        User user2 = new User(1L, "Иванов2", "Директор");
-        User user3 = new User(1L, "Иванов3", "Директор");
-        List<User> users = Optional.of(Arrays.asList(new UserTask(user1), new UserTask(null), new UserTask(user3))).orElse(new ArrayList<>()).stream()
-                .map(UserTask::getAssignee)
-                .filter(Objects::nonNull)
-                .filter(user -> Objects.nonNull(user.getFullName()))
-                .filter(user -> Objects.nonNull(user.getPosition()))
-                .collect(ArrayList::new, (userList, user) -> {
-                    userList.stream()
-                            .filter(u -> Objects.equals(user.getId(), u.getId()))
-                            .findFirst()
-                            .ifPresent(userList::remove);
-                    userList.add(user);
-                }, ArrayList::addAll);
-        System.out.println(users);
+    private static Integer count = 0;
+    private static final Object object = new Object();
+
+    private static void sleep() {
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            throw new RuntimeException("Couldn't sleep thread", e);
+        }
     }
-}
 
+    static Runnable runnable = () -> {
+        for (int i = 0; i < 10; i++) {
+            synchronized (object) {
+                count++;
+                System.out.println(Thread.currentThread().getName() + " = " + count);
+            }
+            sleep();
+        }
+    };
 
-@Data
-@AllArgsConstructor
-class User {
-    Long id;
-    String fullName;
-    String position;
-}
-
-@Data
-@AllArgsConstructor
-class UserTask {
-    User assignee;
+    public static void main(String[] args) throws InterruptedException {
+        Thread t1 = new Thread(runnable, "t1");
+        Thread t2 = new Thread(runnable, "t2");
+        t1.start();
+        t2.start();
+    }
 }

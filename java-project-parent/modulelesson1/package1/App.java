@@ -1,7 +1,7 @@
 package package1;
 
-//import package3.Cube;
-//import package3.CubeProvider;
+import package3.Cube;
+import package3.CubeProvider;
 
 import package4.CubeOther;
 

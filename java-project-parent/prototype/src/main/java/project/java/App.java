@@ -1,5 +1,7 @@
 package project.java;
 
+import java.util.Hashtable;
+
 public class App {
     public static void main(String[] args) throws CloneNotSupportedException {
         Actionable dragon1 = CharacterFactoryFactory.createDragonFactory().create("dragon");
@@ -7,6 +9,7 @@ public class App {
         System.out.println(((Skeleton)skeleton1).health);//для логов
         dragon1.attack(skeleton1);
         System.out.println(((Skeleton)skeleton1).health);//для логов
+        Hashtable x;
     }
 }
 

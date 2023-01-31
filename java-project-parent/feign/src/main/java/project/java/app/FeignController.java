@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import project.java.feigns.FeignClientDecode404;
 import project.java.feigns.FeignClientExample1;
@@ -33,22 +34,25 @@ public class FeignController {
     }
 
     @PutMapping("/putmethod/{test}")
-    public void callput(@PathVariable("test") String test,@RequestBody OrdersRequest1C ordersRequest1C) {
+    public void callput(@PathVariable("test") String test, @RequestBody OrdersRequest1C ordersRequest1C) {
         System.out.println(test);
         System.out.println(ordersRequest1C);
     }
 
     @GetMapping("/call3")
     public void call3() {
-        OrdersRequest1C ordersRequest1C=new OrdersRequest1C();
+        OrdersRequest1C ordersRequest1C = new OrdersRequest1C();
         ordersRequest1C.setResult(true);
-        testFeign.putmethod("123",ordersRequest1C);
+        testFeign.putmethod("123", ordersRequest1C);
     }
 
     @GetMapping("/call")
     //@SneakyThrows
-    public OrdersRequest1C call() {
-        return feignClientExample1.feign("SD04152282");
+    public ResponseEntity<Result<Boolean>> call() throws SkipException {
+
+        //throw new SkipException();
+        return ResponseEntity.status(400).body(Result.error(400,"sdf asasfg"));//.body("asd");
+        //return feignClientExample1.feign("SD04152282");
     }
 
     @GetMapping("/call2")
