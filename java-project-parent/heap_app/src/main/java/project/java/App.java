@@ -34,5 +34,6 @@ public class App {
         //add comments
         //коммент 1
         //коммент 2
+        //коммент 3
     }
 }
