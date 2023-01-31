@@ -33,5 +33,6 @@ public class App {
         //Добавим комментарий для test1
         //add comments
         //коммент 1
+        //коммент 2
     }
 }
