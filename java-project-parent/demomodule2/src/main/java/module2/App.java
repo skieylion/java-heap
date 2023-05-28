@@ -1,6 +1,6 @@
 package module2;
 
-import module1.calc.Calculator;
+//import module1.calc.Calculator;
 
 /**
  * Hello world!

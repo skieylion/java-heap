@@ -1,18 +1,16 @@
 package package1;
 
 import package3.Cube;
-import package3.CubeProvider;
-
-import package4.CubeOther;
-
-import java.util.ServiceLoader;
+import package31.*;
+import package2.CubeMinus;
 
 /**
  * Hello world!
  */
 public class App {
     public static void main(String[] args) {
-        CubeOther cubeOther = new CubeOther();
+        Cube cube = new CubeMinus();
+        CubeMinus.action(cube);
     }
 }
 

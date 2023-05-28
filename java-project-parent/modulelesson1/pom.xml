@@ -26,7 +26,13 @@
         </dependency>
         <dependency>
             <groupId>project.java</groupId>
-            <artifactId>modulelesson4</artifactId>
+            <artifactId>modulelesson3</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>project.java</groupId>
+            <artifactId>modulelesson2</artifactId>
             <version>1.0-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>

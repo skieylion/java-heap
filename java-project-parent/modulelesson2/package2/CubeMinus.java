@@ -2,7 +2,6 @@ package package2;
 
 
 import package3.Cube;
-import package4.CubeOther;
 
 /**
  * Hello world!
@@ -15,8 +14,16 @@ public class CubeMinus implements Cube {
 
     @Override
     public int operation(int a, int b) {
-        CubeOther cubeOther = new CubeOther();
-        cubeOther.print();
         return a - b;
     }
+
+    public static void action(Cube cube) {
+        System.out.println(cube.getName());
+        cube.action(cube.getAction());
+    }
 }
+
+abstract class Test {
+
+}
+

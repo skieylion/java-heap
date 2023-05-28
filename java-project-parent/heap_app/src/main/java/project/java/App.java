@@ -1,38 +1,43 @@
 package project.java;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.InetAddress;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.net.SocketTimeoutException;
+import java.net.UnknownHostException;
+import java.util.Arrays;
+
 public class App {
 
-    private static Integer count = 0;
-    private static final Object object = new Object();
+    private static int COUNT_MAX = 5;
 
-    private static void sleep() {
-        try {
-            Thread.sleep(100);
-        } catch (InterruptedException e) {
-            throw new RuntimeException("Couldn't sleep thread", e);
-        }
+    private static int getCount() {
+        System.out.println("The attempt №" + COUNT_MAX);
+        return --COUNT_MAX;
     }
 
-    static Runnable runnable = () -> {
-        for (int i = 0; i < 10; i++) {
-            synchronized (object) {
-                count++;
-                System.out.println(Thread.currentThread().getName() + " = " + count);
+    public static void main(String[] args) throws IOException {
+        try (ServerSocket server = new ServerSocket(4040)) {
+            System.out.println("The server is created");
+            server.setSoTimeout(10000);
+            System.out.println("The address = " + server.getInetAddress().getHostAddress());
+            while (getCount() > 0) {
+                System.out.println("The server is waiting clients");
+                try (Socket client = server.accept()) {
+                    System.out.println("The address client is " + client.getLocalSocketAddress());
+                    try (DataInputStream dis = new DataInputStream(client.getInputStream());
+                         DataOutputStream dos = new DataOutputStream(client.getOutputStream())) {
+                        System.out.println(dis.readUTF());
+                        dos.writeUTF("Hi. I am a server");
+                    }
+                } catch (SocketTimeoutException e) {
+                    System.out.println("The time is ended");
+                }
             }
-            sleep();
+            System.out.println("The server is closed");
         }
-    };
-
-    public static void main(String[] args) throws InterruptedException {
-        Thread t1 = new Thread(runnable, "t1");
-        Thread t2 = new Thread(runnable, "t2");
-        t1.start();
-        t2.start();
-        //Добавили комментарий
-        //Добавим комментарий для test1
-        //add comments
-        //коммент 1
-        //коммент 2
-        //коммент 3
     }
 }

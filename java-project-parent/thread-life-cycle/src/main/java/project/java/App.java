@@ -37,6 +37,8 @@ public class App {
     }
 
     public static void main(String[] args) throws InterruptedException {
+        Object obj=new Object();
+        obj.notify();
         printState(t1);
         t1.start();
         printState(t1);

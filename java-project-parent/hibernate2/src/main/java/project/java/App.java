@@ -32,7 +32,6 @@ public class App {
         runnable.run();
 
 
-
         EntityManagerFactory emf= Persistence.createEntityManagerFactory("Persistence");
         EntityManager em=emf.createEntityManager();
 

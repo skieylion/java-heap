@@ -51,8 +51,9 @@
     <module>modulelesson1</module>
     <module>modulelesson2</module>
       <module>modulelesson3</module>
-      <module>modulelesson4</module>
       <module>thread-life-cycle</module>
+      <module>string-app</module>
+      <module>file-app</module>
   </modules>
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
