@@ -56,6 +56,7 @@
       <module>file-app</module>
       <module>codewars</module>
       <module>stream-api</module>
+      <module>design-patterns</module>
   </modules>
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
