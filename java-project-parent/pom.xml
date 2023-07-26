@@ -54,6 +54,7 @@
       <module>thread-life-cycle</module>
       <module>string-app</module>
       <module>file-app</module>
+      <module>codewars</module>
   </modules>
     <properties>
         <maven.compiler.source>11</maven.compiler.source>

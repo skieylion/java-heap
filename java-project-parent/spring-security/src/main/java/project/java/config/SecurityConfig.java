@@ -7,6 +7,8 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -45,6 +47,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean("userDetailsService")
     @Override
     protected UserDetailsService userDetailsService() {
+
+        SecurityContextHolder d;
+        Authentication s;
+
         //passwordEncoder().encode("admin") >> $2a$12$MvaiHWKrSYODBWrs.YAJguR0B.lYWje6C82IJA9xr0trWEUd2v8fa
         //passwordEncoder().encode("user") >> $2a$12$aJ2sWWGcXJvziKfYaUwQGeLYivIIeLhh6OghNFMXl7tAC9c3Wkr1S
         return new InMemoryUserDetailsManager(
