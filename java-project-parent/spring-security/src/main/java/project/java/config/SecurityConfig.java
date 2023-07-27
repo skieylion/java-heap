@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import project.java.model.Developer;
 import project.java.model.Permission;
 import project.java.model.Role;
 
@@ -21,6 +22,12 @@ import project.java.model.Role;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+
+    @Bean("dev")
+    public Developer developer() {
+        return new Developer(1L, "s", "12");
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -36,7 +43,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authenticated()
                 .and()
                 .formLogin();
-                //.httpBasic();
+        //.httpBasic();
     }
 
     @Bean
