@@ -57,6 +57,7 @@
       <module>codewars</module>
       <module>stream-api</module>
       <module>design-patterns</module>
+      <module>collection-framework</module>
   </modules>
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
