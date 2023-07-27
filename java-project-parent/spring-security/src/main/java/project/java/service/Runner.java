@@ -11,10 +11,10 @@ public class Runner {
 
 
     //указываем корректное имя бина
-    @Resource(name = "dev")
-    Developer developer;
+    @Resource
+    Developer d_e_v_e_l_o_p_e_r;
 
     public void run() {
-        System.out.println(developer);
+        System.out.println(d_e_v_e_l_o_p_e_r);
     }
 }
