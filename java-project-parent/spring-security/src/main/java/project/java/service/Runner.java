@@ -10,8 +10,8 @@ import javax.annotation.Resource;
 public class Runner {
 
 
-    //бин не будет внедряться потому что имя указано некорректно
-    @Resource(name = "develop")
+    //указываем корректное имя бина
+    @Resource(name = "dev")
     Developer developer;
 
     public void run() {
