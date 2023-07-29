@@ -5,16 +5,19 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.exc.MismatchedInputException;
 import feign.Response;
+import feign.RetryableException;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import project.java.feigns.FeignClientDecode404;
 import project.java.feigns.FeignClientExample1;
+import project.java.feigns.FeignRepeaterClient;
 import project.java.feigns.TestFeign;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.SocketException;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
@@ -31,6 +34,9 @@ public class FeignController {
     private FeignClientDecode404 feignClientDecode404;
     @Autowired
     private TestFeign testFeign;
+
+    @Autowired
+    private FeignRepeaterClient feignRepeaterClient;
 
     @Autowired
     private ObjectMapper objectMapper;
@@ -122,6 +128,17 @@ public class FeignController {
     @PutMapping("call")
     public void updateLunch(@RequestBody Map<String, Boolean> body) {
         System.out.println(body.get("isLunch"));
+    }
+
+    @GetMapping("retry")
+    public String retryTestController() {
+        return feignRepeaterClient.getRetry();
+    }
+
+    @GetMapping("retry-get")
+    public ResponseEntity<String> retryTestControllerGet() throws InterruptedException, SocketException {
+        throw new SocketException("hz");
+        //return ResponseEntity.ok("Hello world");
     }
 
 }
