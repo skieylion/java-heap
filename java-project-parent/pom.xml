@@ -59,6 +59,7 @@
       <module>design-patterns</module>
       <module>collection-framework</module>
       <module>mock-feign-service</module>
+      <module>jdbc-lessons</module>
   </modules>
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
