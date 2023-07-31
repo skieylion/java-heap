@@ -41,5 +41,8 @@ public class App {
 
         //билдер
         Stream<Integer> stream6 = Stream.<Integer>builder().add(1).add(2).add(5).add(12).build();
+
+        //метод boxed
+        Stream<Integer> stream7 = IntStream.of(1, 2, 3, 4).boxed();
     }
 }
