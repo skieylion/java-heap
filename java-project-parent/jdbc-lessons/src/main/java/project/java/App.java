@@ -2,18 +2,15 @@ package project.java;
 
 import org.postgresql.Driver;
 
+import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class App {
-    public static void main(String[] args) {
-        String username = "test";
-        String password = "test";
-        String url = "jdbc:postgresql://localhost:5434/testdb";
-        try (var connection = DriverManager.getConnection(url, username, password)) {
+    public static void main(String[] args) throws SQLException {
+        try (Connection connection = ConnectionManager.getConnection()) {
             System.out.println(connection.getTransactionIsolation());
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
+
     }
 }
