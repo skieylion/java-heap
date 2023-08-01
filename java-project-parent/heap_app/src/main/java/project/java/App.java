@@ -1,20 +1,29 @@
 package project.java;
 
 import java.util.Date;
+import java.util.TimeZone;
 
 public class App {
 
     public static void main(String[] args) {
-        Date date1 = new Date();
-        Date date2 = new Date(date1.getTime() + 45_000);
-        Date date3 = (Date) date2.clone();
-        date3.setTime(date3.getTime() + 10_000);
-        Date date4 = Date.from(date1.toInstant());
-
-        System.out.println(date2.after(date1));
-        System.out.println(date1.before(date2));
-        System.out.println(date1.compareTo(date3));
-        System.out.println(date1.compareTo(date4));
-        System.out.println(date1.hashCode());
+        String[] array = TimeZone.getAvailableIDs();
+        System.out.println(array[0]);//Africa/Abidjan
+        System.out.println(array[1]);//Africa/Accra
+        String[] arrayOffset = TimeZone.getAvailableIDs(3 * 60 * 60 * 1000);
+        System.out.println(arrayOffset[0]);//Europe/Moscow ...
+        System.out.println(TimeZone.getDefault().getID());//Asia/Yekaterinburg
+        System.out.println(TimeZone.getDefault().getDisplayName());//Екатеринбург, стандартное время
+        System.out.println(TimeZone.getDefault().getDisplayName(true, TimeZone.SHORT));//YEKST
+        //смещение в текущем часовом поясе
+        System.out.println(TimeZone.getDefault().getRawOffset() / 1000 / 60 / 60);//5
+        //какое количество мс используется для прибавки летнего времени
+        System.out.println(TimeZone.getTimeZone("Europe/Paris").getDSTSavings());//1 hour
+        //есть ли летнее время
+        System.out.println(TimeZone.getTimeZone("Europe/Paris").observesDaylightTime());
+        System.out.println(TimeZone.getDefault().getOffset(new Date().getTime()) / 1000 / 60 / 60);//5
+        //действует ли летнее время в дате
+        System.out.println(TimeZone.getTimeZone("Europe/Paris").inDaylightTime(new Date()));
+        //используется ли летнее время в текущем году
+        System.out.println(TimeZone.getTimeZone("Europe/Paris").useDaylightTime());
     }
 }
