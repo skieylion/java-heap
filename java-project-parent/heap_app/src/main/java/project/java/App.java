@@ -19,9 +19,11 @@ public class App {
                 .groupingBy(Function.identity(), Collectors.counting()));
         System.out.println(result);
         //Пример 2. Группировка по полю класса на списки
-        List<Worker> workers = Arrays.asList(new Worker("John", "developer", 100),
-                new Worker("Karl", "developer", 200),
-                new Worker("Simon", "designer", 300));
+        List<Worker> workers = Arrays.asList(new Worker("John", "developer", 100, 25),
+                new Worker("Karl", "developer", 200, 25),
+                new Worker("Karl", "developer", 200, 30),
+                new Worker("Simon", "designer", 300, 30),
+                new Worker("Simon", "designer", 300, 30));
         Map<String, List<Worker>> workersByPosition = workers.stream().collect(Collectors
                 .groupingBy(Worker::getPosition));
         System.out.println(workersByPosition.get("developer"));
@@ -41,6 +43,10 @@ public class App {
         Map<String, String> workersString = workers.stream().collect(Collectors
                 .groupingBy(Worker::getPosition, Collectors.mapping(Worker::getName, Collectors.joining(",", "{", "}"))));
         System.out.println(workersString);
+        //Пример 7. Двойная группировка
+        Map<String, Map<Long, List<Worker>>> doubleWorkers = workers.stream().collect(Collectors
+                .groupingBy(Worker::getPosition, Collectors.groupingBy(Worker::getAge)));
+        System.out.println(doubleWorkers);
     }
 }
 
@@ -50,4 +56,5 @@ class Worker {
     private String name;
     private String position;
     private long salary;
+    private long age;
 }
