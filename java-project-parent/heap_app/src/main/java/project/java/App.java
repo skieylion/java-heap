@@ -9,11 +9,6 @@ public class App {
         int[] counter = new int[words.length];
         return new ArrayList<>();
     }
-
-    //1. алгоритм нарайаны (для реализации перестановок последовательности)
-    //2. паттерн итератор (для обхода всех перестановок)
-
-
     public static void main(String[] args) {
 
 
