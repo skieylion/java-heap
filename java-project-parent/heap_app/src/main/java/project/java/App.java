@@ -9,10 +9,8 @@ public class App {
         int[] counter = new int[words.length];
         return new ArrayList<>();
     }
+
     public static void main(String[] args) {
-
-
-
         new ReentrantLockExample();
     }
 }
