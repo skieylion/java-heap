@@ -7,6 +7,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.IntStream;
@@ -14,7 +15,16 @@ import java.util.stream.Stream;
 
 public class App {
     public static void main(String[] args) throws IOException {
-        createStreams();
+        //createStreams();
+        filterAndSort();
+    }
+
+    //фильтрация и сортировка
+    static void filterAndSort() {
+        List<String> list = List.of("Elen", "Karl", "John", "Andrew", "Anderson", "Alex", "Alexander", "Afrodita", "Anna");
+        list.stream().filter(name -> name.startsWith("A"))
+                .sorted(Comparator.naturalOrder())
+                .forEach(System.out::println);
     }
 
     //Способы создания потоков
