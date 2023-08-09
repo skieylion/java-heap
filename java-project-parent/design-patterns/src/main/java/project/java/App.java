@@ -1,15 +1,15 @@
 package project.java;
 
-import project.java.decorator.text.processor.HtmlEscapeProcessorDecorator;
-import project.java.decorator.text.processor.LowerCaseProcessorDecorator;
-import project.java.decorator.text.processor.TextProcessor;
-import project.java.decorator.text.processor.WhitespaceRemoverDecorator;
-import project.java.facade.CaptureFrameFacade;
+import project.java.iterator.MyIterator;
+import project.java.iterator.MyList;
 
 public class App {
     public static void main(String[] array) {
-        String pathFrom = "C:\\work\\opencv\\video.mp4";
-        String pathTo = "C:\\work\\opencv\\image";
-        CaptureFrameFacade.createImages(5, pathFrom, pathTo, "jpg");
+        MyList myList = new MyList("петя", "федя", "ульяна", "никита");
+        MyIterator myIterator = myList.creatorIterator();
+        while (myIterator.hasNext()) {
+            String name = myIterator.getNext();
+            System.out.println(name.substring(0, 1).toUpperCase() + name.substring(1));
+        }
     }
 }
