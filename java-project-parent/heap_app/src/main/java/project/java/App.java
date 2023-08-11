@@ -13,6 +13,6 @@ public class App {
 
     //клиентский код
     public static void main(String[] args) {
-
+        //GIT (main)
     }
 }
