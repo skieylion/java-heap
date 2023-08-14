@@ -1,4 +1,4 @@
-package project.java.facade;
+package project.java.facade.facade1;
 
 import org.opencv.core.Core;
 import org.opencv.core.Mat;

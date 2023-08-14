@@ -1,4 +1,4 @@
-package project.java;
+package project.java.facade.facade2;
 
 /**
  * Hello world!
