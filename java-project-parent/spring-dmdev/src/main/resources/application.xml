@@ -16,11 +16,7 @@
             </list>
         </constructor-arg>
         <constructor-arg name="properties" type="java.util.Map">
-            <map>
-                <entry key="url" value="postgresql"/>
-                <entry key="password" value="123"/>
-                <entry key="driver" value-ref="driver"/>
-            </map>
+            <null/>
         </constructor-arg>
         <constructor-arg name="params" type="java.util.Set">
             <set>
@@ -29,6 +25,13 @@
                 <ref bean="driver"/>
             </set>
         </constructor-arg>
+        <property name="properties">
+            <map>
+                <entry key="url" value="postgresql"/>
+                <entry key="password" value="123"/>
+                <entry key="driver" value-ref="driver"/>
+            </map>
+        </property>
     </bean>
 
     <bean id="companyRepository" class="project.java.CompanyRepository" factory-method="of">

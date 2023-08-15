@@ -8,7 +8,7 @@ public class ConnectionPool {
     private final String username;
     private final Integer poolSize;
     private final List<Object> args;
-    private final Map<String, Object> properties;
+    private Map<String, Object> properties;
     private final Set<String> params;
 
     public ConnectionPool(String username, Integer poolSize, List<Object> args, Map<String, Object> properties, Set<String> params) {
@@ -17,5 +17,9 @@ public class ConnectionPool {
         this.args = args;
         this.properties = properties;
         this.params = params;
+    }
+
+    public void setProperties(Map<String, Object> properties) {
+        this.properties = properties;
     }
 }
