@@ -18,5 +18,11 @@
                 <entry key="password" value="123"/>
             </map>
         </constructor-arg>
+        <constructor-arg name="params" type="java.util.Set">
+            <set>
+                <value>Hello</value>
+                <value>World</value>
+            </set>
+        </constructor-arg>
     </bean>
 </beans>
