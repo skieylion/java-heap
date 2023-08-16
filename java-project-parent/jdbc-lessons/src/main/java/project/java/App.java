@@ -12,7 +12,6 @@ import java.util.List;
 
 public class App {
     public static void main(String[] args) throws SQLException {
-        printFlightById(2L);
         printFlightBetweenDates(LocalDateTime.of(2019, 1, 1, 1, 1),
                 LocalDateTime.now());
     }
@@ -38,6 +37,9 @@ public class App {
         String sql = "select * from flight where arrival_date between ? and ?";
         try (Connection connection = ConnectionManager.getConnection();
              var preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setFetchSize(1);//размер запрашиваемых данных в 50 строк
+            preparedStatement.setQueryTimeout(5);//ожидание запроса 10 секунд
+            preparedStatement.setMaxRows(3);//максимальное количество строк
             preparedStatement.setTimestamp(1, Timestamp.from(start.toInstant(ZoneOffset.UTC)));
             preparedStatement.setTimestamp(2, Timestamp.from(end.toInstant(ZoneOffset.UTC)));
             ResultSet resultSet1 = preparedStatement.executeQuery();
