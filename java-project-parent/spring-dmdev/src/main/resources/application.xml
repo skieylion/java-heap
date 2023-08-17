@@ -33,8 +33,17 @@
             </map>
         </property>
     </bean>
-
     <bean id="companyRepository" class="project.java.CompanyRepository" factory-method="of">
         <constructor-arg ref="pool1"/>
     </bean>
+    <bean class="org.springframework.beans.factory.config.CustomScopeConfigurer">
+        <property name="scopes">
+            <map>
+                <entry key="thread">
+                    <bean class="org.springframework.context.support.SimpleThreadScope"/>
+                </entry>
+            </map>
+        </property>
+    </bean>
+    <bean id="myThread" class="project.java.MyThread" scope="thread"/>
 </beans>
