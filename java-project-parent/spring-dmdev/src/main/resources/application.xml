@@ -45,5 +45,5 @@
             </map>
         </property>
     </bean>
-    <bean id="myThread" class="project.java.MyThread" scope="prototype"/>
+    <bean id="myThread" class="project.java.MyThread" init-method="init" destroy-method="destroy"/>
 </beans>
