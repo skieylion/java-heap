@@ -14,16 +14,8 @@ public class App {
         var context = new ClassPathXmlApplicationContext("application.xml");
         var myThread1 = context.getBean("myThread", MyThread.class);
         var myThread2 = context.getBean("myThread", MyThread.class);
-
-        new Thread(() -> {
-            var myThread3 = context.getBean("myThread", MyThread.class);
-            if (myThread1 == myThread2) {
-                System.out.println("myThread1=myThread2");
-            }
-            if (myThread3 != myThread1) {
-                System.out.println("myThread3!=myThread1");
-            }
-            System.out.println("end");
-        }, "thread1").start();
+        if (myThread1 != myThread2) {
+            System.out.println("myThread1!=myThread2");
+        }
     }
 }
