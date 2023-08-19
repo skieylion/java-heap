@@ -12,10 +12,28 @@ import java.util.List;
 
 public class App {
     public static void main(String[] args) throws SQLException {
-        printFlightBetweenDates(LocalDateTime.of(2019, 1, 1, 1, 1),
-                LocalDateTime.now());
+        printMetaData();
     }
 
+    static void printMetaData() throws SQLException {
+        try (Connection connection = ConnectionManager.getConnection()) {
+            var metaData = connection.getMetaData();
+            ResultSet catalogs = metaData.getCatalogs();
+            while (catalogs.next()) {
+                String catalogName = catalogs.getString("TABLE_CAT");
+                System.out.printf("- '%s' %n", catalogName);
+                ResultSet schemas = metaData.getSchemas();
+                while (schemas.next()) {
+                    String schemaName = schemas.getString("TABLE_SCHEM");
+                    System.out.printf("-- '%s' %n", schemaName);
+                    ResultSet tables = metaData.getTables(catalogName, schemaName, "%", null);
+                    while (tables.next()) {
+                        System.out.printf("---- '%s' %n", tables.getString("TABLE_NAME"));
+                    }
+                }
+            }
+        }
+    }
 
     static void printFlightById(Long id) throws SQLException {
         String sql = "select * from flight where id=?";
