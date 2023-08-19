@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -16,19 +17,14 @@ public class App {
 
     static void executeTransaction() throws SQLException {
         Connection connection = null;
-        PreparedStatement deleteFlightSql = null;
-        PreparedStatement deleteTicketSql = null;
+        Statement statement = null;
         try {
             connection = ConnectionManager.getConnection();
             connection.setAutoCommit(false);
-            deleteFlightSql = connection.prepareStatement("delete from flight where id=9");
-            deleteTicketSql = connection.prepareStatement("delete from ticket where flight_id=9");
-
-            deleteTicketSql.executeUpdate();
-            if (true) {
-                throw new RuntimeException("some message");
-            }
-            deleteFlightSql.executeUpdate();
+            statement = connection.createStatement();
+            statement.addBatch("delete from flight where id=9");
+            statement.addBatch("delete from ticket where flight_id=9");
+            statement.executeBatch();
             connection.commit();
         } catch (Exception e) {
             if (connection != null) {
@@ -39,11 +35,8 @@ public class App {
             if (connection != null) {
                 connection.close();
             }
-            if (deleteFlightSql != null) {
-                deleteFlightSql.close();
-            }
-            if (deleteTicketSql != null) {
-                deleteTicketSql.close();
+            if (statement != null) {
+                statement.close();
             }
         }
     }
