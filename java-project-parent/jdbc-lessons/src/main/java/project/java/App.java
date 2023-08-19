@@ -1,18 +1,51 @@
 package project.java;
 
-import java.sql.*;
-import java.time.Instant;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
-import java.time.temporal.Temporal;
-import java.time.temporal.TemporalAccessor;
-import java.util.ArrayList;
-import java.util.List;
 
 public class App {
     public static void main(String[] args) throws SQLException {
-        printMetaData();
+        executeTransaction();
+    }
+
+    static void executeTransaction() throws SQLException {
+        Connection connection = null;
+        PreparedStatement deleteFlightSql = null;
+        PreparedStatement deleteTicketSql = null;
+        try {
+            connection = ConnectionManager.getConnection();
+            connection.setAutoCommit(false);
+            deleteFlightSql = connection.prepareStatement("delete from flight where id=9");
+            deleteTicketSql = connection.prepareStatement("delete from ticket where flight_id=9");
+
+            deleteTicketSql.executeUpdate();
+            if (true) {
+                throw new RuntimeException("some message");
+            }
+            deleteFlightSql.executeUpdate();
+            connection.commit();
+        } catch (Exception e) {
+            if (connection != null) {
+                connection.rollback();
+            }
+            throw e;
+        } finally {
+            if (connection != null) {
+                connection.close();
+            }
+            if (deleteFlightSql != null) {
+                deleteFlightSql.close();
+            }
+            if (deleteTicketSql != null) {
+                deleteTicketSql.close();
+            }
+        }
     }
 
     static void printMetaData() throws SQLException {
