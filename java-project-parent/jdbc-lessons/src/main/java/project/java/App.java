@@ -1,5 +1,12 @@
 package project.java;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,10 +16,41 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
+import java.util.Objects;
 
 public class App {
     public static void main(String[] args) throws SQLException {
-        executeTransaction();
+        getImage();
+        // createBlob();
+    }
+
+    static void getImage() {
+        String sql = "select image from aircraft where id=?;";
+        try (var connection = ConnectionManager.getConnection();
+             var preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setInt(1, 1);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                var image = resultSet.getBytes("image");
+                //Path path = Paths.get(Objects.requireNonNull(App.class.getClassLoader().getResource("")).toURI());
+                Path path = Paths.get("output.png");
+                Files.write(path, image, StandardOpenOption.CREATE);
+            }
+        } catch (SQLException | IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    static void createBlob() {
+        String sql = "update aircraft set image = ? where id=1;";
+        try (var connection = ConnectionManager.getConnection();
+             var preparedStatement = connection.prepareStatement(sql)) {
+            Path path = Paths.get(App.class.getClassLoader().getResource("img.png").toURI());
+            preparedStatement.setBytes(1, Files.readAllBytes(path));
+            preparedStatement.executeUpdate();
+        } catch (SQLException | IOException | URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     static void executeTransaction() throws SQLException {
