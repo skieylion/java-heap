@@ -1,5 +1,6 @@
 package project.java;
 
+import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 

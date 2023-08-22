@@ -55,4 +55,5 @@
         </property>
     </bean>
     <bean id="myThread" class="project.java.MyThread" init-method="init" destroy-method="destroy"/>
+    <bean class="project.java.MyBeanFactoryPostProcessor"/>
 </beans>

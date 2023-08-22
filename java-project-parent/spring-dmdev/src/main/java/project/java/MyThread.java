@@ -2,6 +2,10 @@ package project.java;
 
 public class MyThread {
 
+    public String getName() {
+        return "NAME";
+    }
+
     private void init() {
         System.out.println("init MyThread");
     }
