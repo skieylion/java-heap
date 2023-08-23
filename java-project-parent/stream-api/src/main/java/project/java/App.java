@@ -1,5 +1,8 @@
 package project.java;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -10,13 +13,13 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class App {
     public static void main(String[] args) throws IOException {
-        //createStreams();
-        filterAndSort();
+        averaging();
     }
 
     //фильтрация и сортировка
@@ -55,4 +58,19 @@ public class App {
         //метод boxed
         Stream<Integer> stream7 = IntStream.of(1, 2, 3, 4).boxed();
     }
+
+    //расчет среднего
+    static void averaging() {
+        double averageAge = Stream.of(new Student("Вася", 10), new Student("Петя", 19),
+                        new Student("Вова", 67), new Student("Майкл", 29))
+                .collect(Collectors.averagingInt(Student::getAge));
+        System.out.println(averageAge);
+    }
+}
+
+@Getter
+@AllArgsConstructor
+class Student {
+    String name;
+    int age;
 }
