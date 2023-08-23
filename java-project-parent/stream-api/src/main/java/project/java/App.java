@@ -70,10 +70,9 @@ public class App {
 
     //дополнительное преобразование
     static void collectingAndThen() {
-        var students = Stream.of(new Student("Вася", 10), new Student("Петя", 19),
+        long count = Stream.of(new Student("Вася", 10), new Student("Петя", 19),
                         new Student("Вова", 67), new Student("Майкл", 29))
-                .collect(Collectors.collectingAndThen(Collectors.toList(),
-                        Collections::unmodifiableList));
+                .collect(Collectors.counting());
     }
 
 }
