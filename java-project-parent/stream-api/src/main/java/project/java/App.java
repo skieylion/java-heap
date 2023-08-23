@@ -12,15 +12,18 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
+import java.util.TreeMap;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class App {
     public static void main(String[] args) throws IOException {
-        averaging();
+        grouping();
     }
 
     //фильтрация и сортировка
@@ -73,6 +76,19 @@ public class App {
         long count = Stream.of(new Student("Вася", 10), new Student("Петя", 19),
                         new Student("Вова", 67), new Student("Майкл", 29))
                 .collect(Collectors.counting());
+    }
+
+    //группировка
+    static void grouping() {
+        Map<Integer, List<Student>> map1 = Stream.of(new Student("Вася", 10), new Student("Петя", 19),
+                        new Student("Вова", 67), new Student("Майкл", 10))
+                .collect(Collectors.groupingBy(Student::getAge));
+        Map<Integer, Long> map2 = Stream.of(new Student("Вася", 10), new Student("Петя", 19),
+                        new Student("Вова", 67), new Student("Майкл", 10))
+                .collect(Collectors.groupingBy(Student::getAge, Collectors.counting()));
+        Map<Integer, Long> map3 = Stream.of(new Student("Вася", 10), new Student("Петя", 19),
+                        new Student("Вова", 67), new Student("Майкл", 10))
+                .collect(Collectors.groupingBy(Student::getAge, TreeMap::new, Collectors.counting()));
     }
 
 }
