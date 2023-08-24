@@ -56,4 +56,59 @@
     </bean>
     <bean id="myThread" class="project.java.MyThread" init-method="init" destroy-method="destroy"/>
     <bean class="project.java.MyBeanFactoryPostProcessor"/>
+
+    <bean id="hero" class="project.java.Medal">
+        <constructor-arg name="reason" value="MEDAL OF HONOR" type="java.lang.String"/>
+        <constructor-arg name="name" value="HERO" type="java.lang.String"/>
+    </bean>
+    <bean id="bravery" class="project.java.Medal">
+        <constructor-arg name="reason" value="MEDAL OF BRAVERY" type="java.lang.String"/>
+        <constructor-arg name="name" value="BRAVERY" type="java.lang.String"/>
+    </bean>
+
+    <bean id="book1" name="Shawshank" class="project.java.Book">
+        <constructor-arg index="0" value="Shawshank redemption" type="java.lang.String"/>
+    </bean>
+    <bean id="book2" name="WarAndPeace" class="project.java.Book">
+        <constructor-arg index="0" value="War and Peace" type="java.lang.String"/>
+    </bean>
+    <bean id="address" class="project.java.Address">
+        <constructor-arg value="Kazan" type="java.lang.String"/>
+    </bean>
+
+    <bean id="person1" name="Alex, Petrov" class="project.java.Person">
+        <constructor-arg name="books">
+            <set>
+                <ref bean="Shawshank"/>
+                <bean id="book3" name="RuslanAndLudmila" class="project.java.Book">
+                    <constructor-arg value="Ruslan And Ludmila" type="java.lang.String"/>
+                </bean>
+            </set>
+        </constructor-arg>
+        <constructor-arg name="address">
+            <bean class="project.java.Address">
+                <constructor-arg value="Moscow" type="java.lang.String"/>
+            </bean>
+        </constructor-arg>
+        <property name="medals">
+            <set>
+                <ref bean="hero"/>
+            </set>
+        </property>
+    </bean>
+
+    <bean id="person2" name="Simon, White" class="project.java.Person">
+        <constructor-arg name="books">
+            <set>
+                <ref bean="WarAndPeace"/>
+            </set>
+        </constructor-arg>
+        <constructor-arg name="address" ref="address"/>
+        <property name="medals">
+            <set>
+                <ref bean="bravery"/>
+            </set>
+        </property>
+    </bean>
+
 </beans>
