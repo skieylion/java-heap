@@ -8,11 +8,13 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -23,7 +25,7 @@ import java.util.stream.Stream;
 
 public class App {
     public static void main(String[] args) {
-        summing();
+        to();
     }
 
     //фильтрация и сортировка
@@ -158,6 +160,25 @@ public class App {
         var result = Stream.of(new Student("Вася", 10), new Student("Петя", 19),
                         new Student("Вова", 67), new Student("Майкл", 29))
                 .collect(Collectors.summingInt(Student::getAge));
+    }
+
+    static void to() {
+        var arrayList = Stream.generate(() -> new Random().nextInt(5)).limit(20)
+                .collect(Collectors.toCollection(ArrayList<Integer>::new));
+        var list = Stream.generate(() -> new Random().nextInt(5)).limit(20)
+                .collect(Collectors.toList());
+        var set = Stream.generate(() -> new Random().nextInt(5)).limit(20)
+                .collect(Collectors.toSet());
+        var map = Stream.of(new Student("Вася", 10), new Student("Петя", 19),
+                        new Student("Вова", 67), new Student("Майкл", 29))
+                .collect(Collectors.toMap(Student::getName, Student::getAge));
+        var map2 = Stream.of(new Student("Вася", 10), new Student("Петя", 19),
+                        new Student("Вася", 67), new Student("Майкл", 29))
+                .collect(Collectors.toMap(Student::getName, Student::getAge, (age1, age2) -> (age1 + age2)/2));
+        var map3 = Stream.of(new Student("Вася", 10), new Student("Петя", 19),
+                        new Student("Вася", 67), new Student("Майкл", 29))
+                .collect(Collectors.toMap(Student::getName, Student::getAge,
+                        (age1, age2) -> (age1 + age2)/2, LinkedHashMap::new));
     }
 
 }
