@@ -23,7 +23,7 @@ import java.util.stream.Stream;
 
 public class App {
     public static void main(String[] args) {
-        partition();
+        reducing();
     }
 
     //фильтрация и сортировка
@@ -135,6 +135,15 @@ public class App {
 
         Map<Boolean, Long> result2 = Stream.generate(() -> new Random().nextInt()).limit(20)
                 .collect(Collectors.partitioningBy(n -> n % 2 == 0, Collectors.counting()));
+    }
+
+    static void reducing() {
+        var result = Stream.generate(() -> new Random().nextInt(5)).limit(20)
+                .collect(Collectors.reducing((a, b) -> a + b));
+        var result2 = Stream.of(1, 2, 3, 4, 5)
+                .collect(Collectors.reducing(10, (a, b) -> a + b));
+        var result3 = Stream.of("1", "2", "3", "4", "5")
+                .collect(Collectors.reducing(10, v -> Integer.parseInt(v), Integer::sum));
     }
 
 }
