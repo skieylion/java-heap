@@ -107,6 +107,15 @@ public class App {
                 .collect(Collectors.groupingBy(Student::getAge, TreeMap::new, Collectors.counting()));
     }
 
+    static void joining() {
+        String symbols = Stream.of("D", "X", "F", "A").collect(Collectors.joining());
+        System.out.println(symbols);
+        String symbols2 = Stream.of("D", "X", "F", "A").collect(Collectors.joining("-"));
+        System.out.println(symbols2);
+        String symbols3 = Stream.of("D", "X", "F", "A").collect(Collectors.joining("-", "[", "]"));
+        System.out.println(symbols3);
+    }
+
 }
 
 @Getter
