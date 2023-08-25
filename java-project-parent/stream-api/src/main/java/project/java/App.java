@@ -23,7 +23,7 @@ import java.util.stream.Stream;
 
 public class App {
     public static void main(String[] args) {
-        maxAndMinBy();
+        partition();
     }
 
     //фильтрация и сортировка
@@ -127,6 +127,14 @@ public class App {
                 .collect(Collectors.minBy(Comparator.naturalOrder()));
         var maxOpt = Stream.generate(() -> new Random().nextInt()).limit(20)
                 .collect(Collectors.maxBy(Comparator.naturalOrder()));
+    }
+
+    static void partition() {
+        Map<Boolean, List<Integer>> result = Stream.generate(() -> new Random().nextInt()).limit(20)
+                .collect(Collectors.partitioningBy(n -> n % 2 == 0));
+
+        Map<Boolean, Long> result2 = Stream.generate(() -> new Random().nextInt()).limit(20)
+                .collect(Collectors.partitioningBy(n -> n % 2 == 0, Collectors.counting()));
     }
 
 }
