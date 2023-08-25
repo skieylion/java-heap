@@ -23,7 +23,7 @@ import java.util.stream.Stream;
 
 public class App {
     public static void main(String[] args) {
-        summirizing();
+        summing();
     }
 
     //фильтрация и сортировка
@@ -152,6 +152,12 @@ public class App {
         System.out.println(result.getAverage());
         System.out.println(result.getSum());
         System.out.println(result.getMax());
+    }
+
+    static void summing() {
+        var result = Stream.of(new Student("Вася", 10), new Student("Петя", 19),
+                        new Student("Вова", 67), new Student("Майкл", 29))
+                .collect(Collectors.summingInt(Student::getAge));
     }
 
 }
