@@ -23,7 +23,7 @@ import java.util.stream.Stream;
 
 public class App {
     public static void main(String[] args) {
-        reducing();
+        summirizing();
     }
 
     //фильтрация и сортировка
@@ -144,6 +144,14 @@ public class App {
                 .collect(Collectors.reducing(10, (a, b) -> a + b));
         var result3 = Stream.of("1", "2", "3", "4", "5")
                 .collect(Collectors.reducing(10, v -> Integer.parseInt(v), Integer::sum));
+    }
+
+    static void summirizing() {
+        var result = Stream.generate(() -> new Random().nextInt(5)).limit(20)
+                .collect(Collectors.summarizingInt(Integer::intValue));
+        System.out.println(result.getAverage());
+        System.out.println(result.getSum());
+        System.out.println(result.getMax());
     }
 
 }
