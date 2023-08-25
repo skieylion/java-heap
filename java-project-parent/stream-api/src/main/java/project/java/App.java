@@ -22,8 +22,8 @@ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class App {
-    public static void main(String[] args) throws IOException {
-        grouping();
+    public static void main(String[] args) {
+        filtering();
     }
 
     //фильтрация и сортировка
@@ -76,6 +76,12 @@ public class App {
         long count = Stream.of(new Student("Вася", 10), new Student("Петя", 19),
                         new Student("Вова", 67), new Student("Майкл", 29))
                 .collect(Collectors.counting());
+    }
+
+    //фильтрация
+    static void filtering() {
+        var collection = Stream.generate(() -> new Random().nextInt()).limit(20)
+                .collect(Collectors.filtering(n -> n > 0, Collectors.toList()));
     }
 
     //группировка
