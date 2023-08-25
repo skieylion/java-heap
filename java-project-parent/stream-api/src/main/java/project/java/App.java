@@ -23,7 +23,7 @@ import java.util.stream.Stream;
 
 public class App {
     public static void main(String[] args) {
-        filtering();
+        flatMapping();
     }
 
     //фильтрация и сортировка
@@ -82,6 +82,16 @@ public class App {
     static void filtering() {
         var collection = Stream.generate(() -> new Random().nextInt()).limit(20)
                 .collect(Collectors.filtering(n -> n > 0, Collectors.toList()));
+    }
+
+    static void flatMapping() {
+        List<List<Integer>> listOfLists = List.of(
+                List.of(1, 2, 3),
+                List.of(4, 5),
+                List.of(6, 7, 8, 9)
+        );
+        var collection = listOfLists.stream()
+                .collect(Collectors.flatMapping(Collection::stream, Collectors.toList()));
     }
 
     //группировка
