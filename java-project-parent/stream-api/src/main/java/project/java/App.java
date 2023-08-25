@@ -23,7 +23,7 @@ import java.util.stream.Stream;
 
 public class App {
     public static void main(String[] args) {
-        mapping();
+        maxAndMinBy();
     }
 
     //фильтрация и сортировка
@@ -117,9 +117,16 @@ public class App {
     }
 
     static void mapping() {
-        var collection=Stream.of(new Student("Вася", 10), new Student("Петя", 19),
+        var collection = Stream.of(new Student("Вася", 10), new Student("Петя", 19),
                         new Student("Вова", 67), new Student("Майкл", 29))
-                .collect(Collectors.mapping(s->s.getName(),Collectors.toList()));
+                .collect(Collectors.mapping(s -> s.getName(), Collectors.toList()));
+    }
+
+    static void maxAndMinBy() {
+        var minOpt = Stream.generate(() -> new Random().nextInt()).limit(20)
+                .collect(Collectors.minBy(Comparator.naturalOrder()));
+        var maxOpt = Stream.generate(() -> new Random().nextInt()).limit(20)
+                .collect(Collectors.maxBy(Comparator.naturalOrder()));
     }
 
 }
