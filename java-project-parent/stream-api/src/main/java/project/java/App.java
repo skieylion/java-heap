@@ -23,7 +23,7 @@ import java.util.stream.Stream;
 
 public class App {
     public static void main(String[] args) {
-        flatMapping();
+        mapping();
     }
 
     //фильтрация и сортировка
@@ -114,6 +114,12 @@ public class App {
         System.out.println(symbols2);
         String symbols3 = Stream.of("D", "X", "F", "A").collect(Collectors.joining("-", "[", "]"));
         System.out.println(symbols3);
+    }
+
+    static void mapping() {
+        var collection=Stream.of(new Student("Вася", 10), new Student("Петя", 19),
+                        new Student("Вова", 67), new Student("Майкл", 29))
+                .collect(Collectors.mapping(s->s.getName(),Collectors.toList()));
     }
 
 }
