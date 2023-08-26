@@ -5,7 +5,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class TicketDao {
     private static final TicketDao INSTANCE = new TicketDao();
@@ -70,6 +72,48 @@ public class TicketDao {
              var preparedStatement = conntection.prepareStatement(READ_ALL_SQL)) {
             List<Ticket> tickets = new ArrayList<>();
             ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                Ticket ticket = new Ticket();
+                ticket.setId(resultSet.getLong("id"));
+                ticket.setCost(resultSet.getBigDecimal("cost"));
+                ticket.setFlightId(resultSet.getLong("flight_id"));
+                ticket.setPassengerNo(resultSet.getString("passenger_no"));
+                ticket.setGetPassengerName(resultSet.getString("passenger_name"));
+                ticket.setSeatNo(resultSet.getString("seat_no"));
+                tickets.add(ticket);
+            }
+            return tickets;
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
+
+    public List<Ticket> findAll(TicketFilter ticketFilter) {
+        List<Object> parameters = new ArrayList<>();
+        List<String> whereSql = new ArrayList<>();
+        Optional.ofNullable(ticketFilter.getSeatNo()).ifPresent(seatNo -> {
+            whereSql.add("seat_no LIKE ?");
+            parameters.add("%" + seatNo + "%");
+        });
+        Optional.ofNullable(ticketFilter.getPassengerName()).ifPresent(passengerName -> {
+            whereSql.add("passenger_name = ?");
+            parameters.add(passengerName);
+        });
+        parameters.add(ticketFilter.getLimit());
+        parameters.add(ticketFilter.getOffset());
+
+        String where = whereSql.stream().collect(Collectors.joining(" AND ", " WHERE ", " LIMIT ? OFFSET ? "));
+
+        String sql = READ_ALL_SQL + where;
+
+        try (var conntection = ConnectionManager.getConnection();
+             var preparedStatement = conntection.prepareStatement(sql)) {
+            for (int i = 0; i < parameters.size(); i++) {
+                preparedStatement.setObject(i + 1, parameters.get(i));
+            }
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            List<Ticket> tickets = new ArrayList<>();
             while (resultSet.next()) {
                 Ticket ticket = new Ticket();
                 ticket.setId(resultSet.getLong("id"));

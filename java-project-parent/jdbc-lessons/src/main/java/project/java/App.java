@@ -22,13 +22,8 @@ import java.util.Objects;
 
 public class App {
     public static void main(String[] args) throws SQLException {
-        Ticket ticket = save();
-        System.out.println(read(ticket.getId()));
-        ticket.setCost(BigDecimal.ONE);
-        update(ticket);
-        System.out.println(read(ticket.getId()));
-        delete(ticket.getId());
-        System.out.println(readAll());
+        var tickets = findAll();
+        System.out.println(tickets);
     }
 
     static void delete(long id) {
@@ -45,6 +40,11 @@ public class App {
     static List<Ticket> readAll() {
         var ticketDao = TicketDao.getInstance();
         return ticketDao.readAll();
+    }
+
+    static List<Ticket> findAll() {
+        var ticketDao = TicketDao.getInstance();
+        return ticketDao.findAll(new TicketFilter(4, 0, "B", "Иван Розмаринов"));
     }
 
 
