@@ -1,6 +1,7 @@
 package project.java;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -20,8 +21,27 @@ import java.util.Objects;
 
 public class App {
     public static void main(String[] args) throws SQLException {
-        getImage();
-        // createBlob();
+        long ticketId = save();
+        delete(ticketId);
+    }
+
+    static void delete(long id) {
+        var ticketDao = TicketDao.getInstance();
+        boolean result = ticketDao.delete(id);
+        System.out.println(result);
+    }
+
+    static long save() {
+        var ticketDao = TicketDao.getInstance();
+        Ticket ticket = new Ticket();
+        ticket.setCost(BigDecimal.TEN);
+        ticket.setSeatNo("11");
+        ticket.setGetPassengerName("Иван Петров");
+        ticket.setPassengerNo("23234A");
+        ticket.setFlightId(8L);
+        var savedTicket = ticketDao.save(ticket);
+        System.out.println(savedTicket);
+        return savedTicket.getId();
     }
 
     static void getImage() {
