@@ -17,12 +17,18 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
+import java.util.List;
 import java.util.Objects;
 
 public class App {
     public static void main(String[] args) throws SQLException {
-        long ticketId = save();
-        delete(ticketId);
+        Ticket ticket = save();
+        System.out.println(read(ticket.getId()));
+        ticket.setCost(BigDecimal.ONE);
+        update(ticket);
+        System.out.println(read(ticket.getId()));
+        delete(ticket.getId());
+        System.out.println(readAll());
     }
 
     static void delete(long id) {
@@ -31,7 +37,18 @@ public class App {
         System.out.println(result);
     }
 
-    static long save() {
+    static Ticket read(long id) {
+        var ticketDao = TicketDao.getInstance();
+        return ticketDao.read(id).get();
+    }
+
+    static List<Ticket> readAll() {
+        var ticketDao = TicketDao.getInstance();
+        return ticketDao.readAll();
+    }
+
+
+    static Ticket save() {
         var ticketDao = TicketDao.getInstance();
         Ticket ticket = new Ticket();
         ticket.setCost(BigDecimal.TEN);
@@ -41,7 +58,12 @@ public class App {
         ticket.setFlightId(8L);
         var savedTicket = ticketDao.save(ticket);
         System.out.println(savedTicket);
-        return savedTicket.getId();
+        return savedTicket;
+    }
+
+    static void update(Ticket ticket) {
+        var ticketDao = TicketDao.getInstance();
+        ticketDao.update(ticket);
     }
 
     static void getImage() {

@@ -3,12 +3,20 @@ package project.java;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 public class TicketDao {
     private static final TicketDao INSTANCE = new TicketDao();
     private static final String DELETE_SQL = "delete from ticket where id = ?";
     private static final String SAVE_SQL = "insert into ticket(passenger_no, passenger_name, flight_id, seat_no, cost)" +
             "values (?,?,?,?,?);";
+    private static final String UPDATE_SQL = "update ticket set passenger_no=?, passenger_name=?, flight_id=?, seat_no=?, cost=? " +
+            " where id=?";
+    private static final String READ_SQL = "select id, passenger_no, passenger_name, flight_id, seat_no, cost from ticket " +
+            " where id=?";
+    private static final String READ_ALL_SQL = "select id, passenger_no, passenger_name, flight_id, seat_no, cost from ticket ";
 
     private TicketDao() {
     }
@@ -36,11 +44,68 @@ public class TicketDao {
         }
     }
 
+    public Optional<Ticket> read(long id) {
+        try (var conntection = ConnectionManager.getConnection();
+             var preparedStatement = conntection.prepareStatement(READ_SQL)) {
+            preparedStatement.setLong(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                Ticket ticket = new Ticket();
+                ticket.setId(resultSet.getLong("id"));
+                ticket.setCost(resultSet.getBigDecimal("cost"));
+                ticket.setFlightId(resultSet.getLong("flight_id"));
+                ticket.setPassengerNo(resultSet.getString("passenger_no"));
+                ticket.setGetPassengerName(resultSet.getString("passenger_name"));
+                ticket.setSeatNo(resultSet.getString("seat_no"));
+                return Optional.of(ticket);
+            }
+            return Optional.empty();
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
+
+    public List<Ticket> readAll() {
+        try (var conntection = ConnectionManager.getConnection();
+             var preparedStatement = conntection.prepareStatement(READ_ALL_SQL)) {
+            List<Ticket> tickets = new ArrayList<>();
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                Ticket ticket = new Ticket();
+                ticket.setId(resultSet.getLong("id"));
+                ticket.setCost(resultSet.getBigDecimal("cost"));
+                ticket.setFlightId(resultSet.getLong("flight_id"));
+                ticket.setPassengerNo(resultSet.getString("passenger_no"));
+                ticket.setGetPassengerName(resultSet.getString("passenger_name"));
+                ticket.setSeatNo(resultSet.getString("seat_no"));
+                tickets.add(ticket);
+            }
+            return tickets;
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
+
     public boolean delete(long id) {
         try (var conntection = ConnectionManager.getConnection();
              var preparedStatement = conntection.prepareStatement(DELETE_SQL)) {
             preparedStatement.setLong(1, id);
             return preparedStatement.executeUpdate() > 0;
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
+
+    public void update(Ticket ticket) {
+        try (var conntection = ConnectionManager.getConnection();
+             var preparedStatement = conntection.prepareStatement(UPDATE_SQL)) {
+            preparedStatement.setString(1, ticket.getPassengerNo());
+            preparedStatement.setString(2, ticket.getGetPassengerName());
+            preparedStatement.setLong(3, ticket.getFlightId());
+            preparedStatement.setString(4, ticket.getSeatNo());
+            preparedStatement.setBigDecimal(5, ticket.getCost());
+            preparedStatement.setLong(6, ticket.getId());
+            preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new DaoException(e);
         }
