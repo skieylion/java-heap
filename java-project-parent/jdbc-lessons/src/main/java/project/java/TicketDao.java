@@ -9,7 +9,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class TicketDao {
+public class TicketDao implements Dao<Long, Ticket> {
     private static final TicketDao INSTANCE = new TicketDao();
     private static final String DELETE_SQL = "delete from ticket where id = ?";
     private static final String SAVE_SQL = "insert into ticket(passenger_no, passenger_name, flight_id, seat_no, cost)" +
@@ -18,9 +18,7 @@ public class TicketDao {
             " where id=?";
     private static final String READ_SQL = "select id, passenger_no, passenger_name, flight_id, seat_no, cost from ticket " +
             " where id=?";
-    private static final String READ_ALL_SQL = "select t.id, passenger_no, passenger_name, flight_id, seat_no, cost, " +
-            " f.id as f_id, f.status as f_status, f.flight_no as f_flight_no " +
-            "from ticket t left join flight f on t.id=f.id";
+    private static final String READ_ALL_SQL = "select id, passenger_no, passenger_name, flight_id, seat_no, cost from ticket ";
 
     private TicketDao() {
     }
@@ -32,9 +30,10 @@ public class TicketDao {
     public Ticket save(Ticket ticket) {
         try (var conntection = ConnectionManager.getConnection();
              var preparedStatement = conntection.prepareStatement(SAVE_SQL, Statement.RETURN_GENERATED_KEYS)) {
+            var flightDao = FlightDao.getInstance();
             preparedStatement.setString(1, ticket.getPassengerNo());
             preparedStatement.setString(2, ticket.getGetPassengerName());
-            preparedStatement.setLong(3, ticket.getFlight().getId());
+            preparedStatement.setLong(3, flightDao.save(ticket.getFlight()).getId());
             preparedStatement.setString(4, ticket.getSeatNo());
             preparedStatement.setBigDecimal(5, ticket.getCost());
             preparedStatement.executeUpdate();
@@ -48,7 +47,7 @@ public class TicketDao {
         }
     }
 
-    public Optional<Ticket> read(long id) {
+    public Optional<Ticket> read(Long id) {
         try (var conntection = ConnectionManager.getConnection();
              var preparedStatement = conntection.prepareStatement(READ_SQL)) {
             preparedStatement.setLong(1, id);
@@ -57,7 +56,8 @@ public class TicketDao {
                 Ticket ticket = new Ticket();
                 ticket.setId(resultSet.getLong("id"));
                 ticket.setCost(resultSet.getBigDecimal("cost"));
-                ticket.setFlight(getFlight(resultSet));
+                var flight = FlightDao.getInstance().read(resultSet.getLong("flight_id"));
+                ticket.setFlight(flight.get());
                 ticket.setPassengerNo(resultSet.getString("passenger_no"));
                 ticket.setGetPassengerName(resultSet.getString("passenger_name"));
                 ticket.setSeatNo(resultSet.getString("seat_no"));
@@ -78,7 +78,8 @@ public class TicketDao {
                 Ticket ticket = new Ticket();
                 ticket.setId(resultSet.getLong("id"));
                 ticket.setCost(resultSet.getBigDecimal("cost"));
-                ticket.setFlight(getFlight(resultSet));
+                var flight = FlightDao.getInstance().read(resultSet.getLong("flight_id"));
+                ticket.setFlight(flight.get());
                 ticket.setPassengerNo(resultSet.getString("passenger_no"));
                 ticket.setGetPassengerName(resultSet.getString("passenger_name"));
                 ticket.setSeatNo(resultSet.getString("seat_no"));
@@ -120,7 +121,8 @@ public class TicketDao {
                 Ticket ticket = new Ticket();
                 ticket.setId(resultSet.getLong("id"));
                 ticket.setCost(resultSet.getBigDecimal("cost"));
-                ticket.setFlight(getFlight(resultSet));
+                var flight = FlightDao.getInstance().read(resultSet.getLong("flight_id"));
+                ticket.setFlight(flight.get());
                 ticket.setPassengerNo(resultSet.getString("passenger_no"));
                 ticket.setGetPassengerName(resultSet.getString("passenger_name"));
                 ticket.setSeatNo(resultSet.getString("seat_no"));
@@ -132,7 +134,7 @@ public class TicketDao {
         }
     }
 
-    public boolean delete(long id) {
+    public boolean delete(Long id) {
         try (var conntection = ConnectionManager.getConnection();
              var preparedStatement = conntection.prepareStatement(DELETE_SQL)) {
             preparedStatement.setLong(1, id);
