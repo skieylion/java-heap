@@ -18,7 +18,9 @@ public class TicketDao {
             " where id=?";
     private static final String READ_SQL = "select id, passenger_no, passenger_name, flight_id, seat_no, cost from ticket " +
             " where id=?";
-    private static final String READ_ALL_SQL = "select id, passenger_no, passenger_name, flight_id, seat_no, cost from ticket ";
+    private static final String READ_ALL_SQL = "select t.id, passenger_no, passenger_name, flight_id, seat_no, cost, " +
+            " f.id as f_id, f.status as f_status, f.flight_no as f_flight_no " +
+            "from ticket t left join flight f on t.id=f.id";
 
     private TicketDao() {
     }
@@ -32,7 +34,7 @@ public class TicketDao {
              var preparedStatement = conntection.prepareStatement(SAVE_SQL, Statement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setString(1, ticket.getPassengerNo());
             preparedStatement.setString(2, ticket.getGetPassengerName());
-            preparedStatement.setLong(3, ticket.getFlightId());
+            preparedStatement.setLong(3, ticket.getFlight().getId());
             preparedStatement.setString(4, ticket.getSeatNo());
             preparedStatement.setBigDecimal(5, ticket.getCost());
             preparedStatement.executeUpdate();
@@ -55,7 +57,7 @@ public class TicketDao {
                 Ticket ticket = new Ticket();
                 ticket.setId(resultSet.getLong("id"));
                 ticket.setCost(resultSet.getBigDecimal("cost"));
-                ticket.setFlightId(resultSet.getLong("flight_id"));
+                ticket.setFlight(getFlight(resultSet));
                 ticket.setPassengerNo(resultSet.getString("passenger_no"));
                 ticket.setGetPassengerName(resultSet.getString("passenger_name"));
                 ticket.setSeatNo(resultSet.getString("seat_no"));
@@ -76,7 +78,7 @@ public class TicketDao {
                 Ticket ticket = new Ticket();
                 ticket.setId(resultSet.getLong("id"));
                 ticket.setCost(resultSet.getBigDecimal("cost"));
-                ticket.setFlightId(resultSet.getLong("flight_id"));
+                ticket.setFlight(getFlight(resultSet));
                 ticket.setPassengerNo(resultSet.getString("passenger_no"));
                 ticket.setGetPassengerName(resultSet.getString("passenger_name"));
                 ticket.setSeatNo(resultSet.getString("seat_no"));
@@ -118,7 +120,7 @@ public class TicketDao {
                 Ticket ticket = new Ticket();
                 ticket.setId(resultSet.getLong("id"));
                 ticket.setCost(resultSet.getBigDecimal("cost"));
-                ticket.setFlightId(resultSet.getLong("flight_id"));
+                ticket.setFlight(getFlight(resultSet));
                 ticket.setPassengerNo(resultSet.getString("passenger_no"));
                 ticket.setGetPassengerName(resultSet.getString("passenger_name"));
                 ticket.setSeatNo(resultSet.getString("seat_no"));
@@ -145,7 +147,7 @@ public class TicketDao {
              var preparedStatement = conntection.prepareStatement(UPDATE_SQL)) {
             preparedStatement.setString(1, ticket.getPassengerNo());
             preparedStatement.setString(2, ticket.getGetPassengerName());
-            preparedStatement.setLong(3, ticket.getFlightId());
+            preparedStatement.setLong(3, ticket.getFlight().getId());
             preparedStatement.setString(4, ticket.getSeatNo());
             preparedStatement.setBigDecimal(5, ticket.getCost());
             preparedStatement.setLong(6, ticket.getId());
@@ -153,5 +155,18 @@ public class TicketDao {
         } catch (SQLException e) {
             throw new DaoException(e);
         }
+    }
+
+    private Flight getFlight(ResultSet resultSet) {
+        try {
+            Flight flight = new Flight();
+            flight.setId(resultSet.getLong("f_id"));
+            flight.setStatus(resultSet.getString("f_status"));
+            flight.setFlightNo(resultSet.getString("f_flight_no"));
+            return flight;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 }

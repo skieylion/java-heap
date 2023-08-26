@@ -55,7 +55,11 @@ public class App {
         ticket.setSeatNo("11");
         ticket.setGetPassengerName("Иван Петров");
         ticket.setPassengerNo("23234A");
-        ticket.setFlightId(8L);
+        var flight = new Flight();
+        flight.setId(8L);
+        flight.setStatus("asd");
+        flight.setFlightNo("asd");
+        ticket.setFlight(flight);
         var savedTicket = ticketDao.save(ticket);
         System.out.println(savedTicket);
         return savedTicket;
