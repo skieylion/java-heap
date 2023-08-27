@@ -111,4 +111,24 @@
         </property>
     </bean>
 
+    <bean id="saltProperty" class="java.lang.String">
+        <constructor-arg type="java.lang.String" value="AXPI5F"/>
+    </bean>
+
+    <bean id="facadeProperty_AVSASDSA2" class="project.java.FacadeProperty" name="facade, property"
+          factory-method="of" init-method="init" destroy-method="destroy">
+        <constructor-arg name="properties">
+            <map>
+                <entry key="url" value="${db.url}"/>
+                <entry key="salt" value-ref="saltProperty"/>
+                <entry key="PI" value="#{T(Math).PI}"/>
+                <entry key="E" value="#{T(Math).E}"/>
+                <entry key="user.country" value="#{systemProperties['user.country']}"/>
+                <entry key="java.version" value="#{systemProperties['java.version']}"/>
+                <entry key="OS" value="#{systemEnvironment['OS']}"/>
+                <entry key="USERNAME" value="#{systemEnvironment['USERNAME']}"/>
+            </map>
+        </constructor-arg>
+    </bean>
+
 </beans>

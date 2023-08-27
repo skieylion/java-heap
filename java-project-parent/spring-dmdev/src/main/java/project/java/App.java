@@ -9,17 +9,10 @@ import java.util.stream.Stream;
 public class App {
     public static void main(String[] args) {
         try (var context = new ClassPathXmlApplicationContext("application.xml")) {
+            var facadeProperty = context.getBean("facade", FacadeProperty.class);
             System.out.println();
-            Stream.of("Alex", "Simon").forEach(name -> {
-                System.out.println("name: " + name);
-                var person = context.getBean(name, Person.class);
-                System.out.println("MEDALS:");
-                person.getMedals().forEach(medal -> System.out.println(medal.getName()));
-                System.out.println("BOOK: " + person.getBooks().get(0).getTitle());
-                System.out.println("ADDRESS: " + person.getAddress().getFullAddress());
-                System.out.println();
-            });
-
+            facadeProperty.getProperties()
+                    .forEach((key, value) -> System.out.printf("%s = %s %n", key, value));
         }
     }
 }
