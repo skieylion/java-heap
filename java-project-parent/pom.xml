@@ -60,6 +60,7 @@
       <module>mock-feign-service</module>
       <module>jdbc-lessons</module>
       <module>spring-dmdev</module>
+      <module>jdbc-home-project</module>
   </modules>
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
