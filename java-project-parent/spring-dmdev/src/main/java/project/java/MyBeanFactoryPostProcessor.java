@@ -9,9 +9,9 @@ import org.springframework.core.PriorityOrdered;
 public class MyBeanFactoryPostProcessor implements BeanFactoryPostProcessor, PriorityOrdered {
     @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory configurableListableBeanFactory) throws BeansException {
-        var bean = configurableListableBeanFactory.getBean("myThread", MyThread.class);
-        System.out.println("BEAN");
-        System.out.println(bean.getName());
+//        var bean = configurableListableBeanFactory.getBean("myThread", MyThread.class);
+//        System.out.println("BEAN");
+//        System.out.println(bean.getName());
     }
 
     @Override

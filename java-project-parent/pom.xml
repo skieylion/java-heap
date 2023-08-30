@@ -41,7 +41,6 @@
       <module>filter</module>
       <module>iterator</module>
       <module>bridge</module>
-      <module>facade</module>
       <module>command</module>
       <module>snapshot</module>
       <module>state</module>

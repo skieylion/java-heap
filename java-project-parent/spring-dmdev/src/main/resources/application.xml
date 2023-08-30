@@ -8,6 +8,10 @@
        http://www.springframework.org/schema/context/spring-context-4.0.xsd">
     <context:property-placeholder location="application.properties"/>
 
+    <context:annotation-config/>
+
+    <!--    <bean class="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor"/>-->
+
     <bean id="driver" class="java.lang.String">
         <constructor-arg type="java.lang.String" value="PostgresDriver"/>
     </bean>
@@ -54,7 +58,7 @@
             </map>
         </property>
     </bean>
-    <bean id="myThread" class="project.java.MyThread" init-method="init" destroy-method="destroy"/>
+    <bean id="myThread" class="project.java.MyThread"/>
     <bean class="project.java.MyBeanFactoryPostProcessor"/>
 
     <bean id="hero" class="project.java.Medal">
