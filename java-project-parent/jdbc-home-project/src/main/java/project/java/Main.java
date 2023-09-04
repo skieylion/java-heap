@@ -4,9 +4,11 @@ import project.java.dao.RequestDao;
 import project.java.dao.RoomDao;
 import project.java.domain.Room;
 import project.java.domain.RoomClass;
+import project.java.utils.ConnectionManager;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Collections;
+import java.sql.Types;
 
 public class Main {
 
@@ -28,7 +30,27 @@ public class Main {
         request.setRoom(room);
         request.setSeats(19);
         requestDao.update(request);
-        Collections s;
+
+        try (var connection = ConnectionManager.getConnection();
+             var stmt = connection.prepareCall("{ ? = call get_string_from_number(?) }")) {
+            stmt.registerOutParameter(1, Types.VARCHAR);
+            stmt.setInt(2, -3);
+            System.out.println(stmt.execute());
+            System.out.println("result = " + stmt.getString(1));
+        }
+
+        try (var connection = ConnectionManager.getConnection()) {
+            ResultSet resultSet = connection.getMetaData().getFunctions(null, null, null);
+            while (resultSet.next()) {
+                String procedureName = resultSet.getString("FUNCTION_NAME");
+                String procedureSchema = resultSet.getString("FUNCTION_SCHEM");
+                // выводим информацию о каждой процедуре
+                System.out.println("Stored Procedure");
+                System.out.println("Schema: " + procedureSchema);
+                System.out.println("Name: " + procedureName);
+                System.out.println("------");
+            }
+        }
     }
 }
 
