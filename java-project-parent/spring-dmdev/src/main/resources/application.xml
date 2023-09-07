@@ -12,6 +12,7 @@
 
     <!--    <bean class="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor"/>-->
 
+    <bean class="project.java.InjectBeanPostProcessor"/>
     <bean id="driver" class="java.lang.String">
         <constructor-arg type="java.lang.String" value="PostgresDriver"/>
     </bean>
@@ -46,9 +47,7 @@
             </map>
         </property>
     </bean>
-    <bean id="companyRepository" class="project.java.CompanyRepository" factory-method="of">
-        <constructor-arg ref="pool1"/>
-    </bean>
+    <bean id="companyRepository" class="project.java.CompanyRepository"/>
     <bean class="org.springframework.beans.factory.config.CustomScopeConfigurer">
         <property name="scopes">
             <map>
