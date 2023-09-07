@@ -1,5 +1,6 @@
 package project.java.rest;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import project.java.model.Developer;
@@ -18,15 +19,19 @@ public class DeveloperRestControllerV1 {
     ).collect(Collectors.toList());
 
 
+    @Cacheable(cacheManager = "caffeineCacheManager", cacheNames = "serviceEntityService", key = "#root.methodName")
     @PreAuthorize("hasAuthority('developer:read')")
     @GetMapping
-    public List<Developer> getAll() {
+    public List<Developer> getAll() throws InterruptedException {
+        Thread.sleep(5000);
         return developerList;
     }
 
+    @Cacheable(cacheManager = "caffeineCacheManager", cacheNames = "serviceEntityService", key = "#id+'-'+#test")
     @PreAuthorize("hasAuthority('developer:read')")
     @GetMapping("/{id}")
-    public Developer getById(@PathVariable("id") Long id) {
+    public Developer getById(@PathVariable("id") Long id, @RequestParam("test") String test) throws InterruptedException {
+        Thread.sleep(5000);
         return developerList.stream().filter((developer -> developer.getId().equals(id))).findFirst().orElse(null);
     }
 
