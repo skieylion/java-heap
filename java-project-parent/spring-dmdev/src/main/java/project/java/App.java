@@ -7,7 +7,7 @@ public class App {
         try (var context = new ClassPathXmlApplicationContext("application.xml")) {
             var myThread = context.getBean("myThread", MyThread.class);
             var companyRepository = context.getBean("companyRepository", CrudRepository.class);
-            companyRepository.findById(1);
+            var company = companyRepository.findById(1);
         }
     }
 }
