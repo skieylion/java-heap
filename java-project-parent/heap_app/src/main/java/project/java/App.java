@@ -1,10 +1,9 @@
 package project.java;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.Arrays;
+import java.util.NavigableMap;
 import java.util.Set;
+import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -12,28 +11,39 @@ import java.util.stream.Stream;
 public class App {
 
     public static void main(String[] args) {
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
-            String expression = reader.readLine();
-            char[] chars = expression.toCharArray();
-            int i = 0, j = chars.length - 1;
-            while (i < j) {
-                if (!isValid(chars[i])) {
-                    i++;
-                } else if (!isValid(chars[j])) {
-                    j--;
-                } else if (Character.toLowerCase(chars[i]) == Character.toLowerCase(chars[j])) {
-                    i++;
-                    j--;
-                } else {
-                    System.out.println("False");
-                    return;
-                }
-            }
-            System.out.println("True");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        NavigableMap<Integer, String> map = new TreeMap<>();
+        map.put(10, "A");
+        map.put(30, "B");
+        map.put(50, "C");
+        System.out.println("lowerKey(30): " + map.lowerKey(30));    // 10
+        System.out.println("higherKey(30): " + map.higherKey(30));  // 50
+        System.out.println("ceilingKey(30): " + map.ceilingKey(30)); // 30
+        System.out.println("floorKey(30): " + map.floorKey(30));    // 30
     }
+
+//    public static void main(String[] args) {
+//        try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
+//            String expression = reader.readLine();
+//            char[] chars = expression.toCharArray();
+//            int i = 0, j = chars.length - 1;
+//            while (i < j) {
+//                if (!isValid(chars[i])) {
+//                    i++;
+//                } else if (!isValid(chars[j])) {
+//                    j--;
+//                } else if (Character.toLowerCase(chars[i]) == Character.toLowerCase(chars[j])) {
+//                    i++;
+//                    j--;
+//                } else {
+//                    System.out.println("False");
+//                    return;
+//                }
+//            }
+//            System.out.println("True");
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
 
     static boolean isValid(char ch) {
         return ch >= 'a' && ch <= 'z' || ch >= 'A' && ch <= 'Z' || ch >= '0' && ch <= '9';
