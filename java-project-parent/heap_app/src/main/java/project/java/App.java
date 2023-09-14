@@ -1,6 +1,7 @@
 package project.java;
 
 import java.util.Arrays;
+import java.util.Map;
 import java.util.NavigableMap;
 import java.util.Set;
 import java.util.TreeMap;
@@ -15,11 +16,16 @@ public class App {
         map.put(10, "A");
         map.put(30, "B");
         map.put(50, "C");
-        System.out.println("lowerKey(30): " + map.lowerKey(30));    // 10
-        System.out.println("higherKey(30): " + map.higherKey(30));  // 50
-        System.out.println("ceilingKey(30): " + map.ceilingKey(30)); // 30
-        System.out.println("floorKey(30): " + map.floorKey(30));    // 30
+        System.out.println("lowerEntry(30): " + entryToString(map.lowerEntry(30)));    // 10=A
+        System.out.println("higherEntry(30): " + entryToString(map.higherEntry(30)));  // 50=C
+        System.out.println("ceilingEntry(30): " + entryToString(map.ceilingEntry(30))); // 30=B
+        System.out.println("floorEntry(30): " + entryToString(map.floorEntry(30)));    // 30=B
+
     }
+    private static String entryToString(Map.Entry<Integer, String> entry) {
+        return entry != null ? entry.getKey() + "=" + entry.getValue() : "null";
+    }
+
 
 //    public static void main(String[] args) {
 //        try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
