@@ -1,8 +1,7 @@
 package project.java;
 
 import java.util.Arrays;
-import java.util.NavigableMap;
-import java.util.NavigableSet;
+import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
@@ -12,18 +11,28 @@ import java.util.stream.Stream;
 public class App {
 
     public static void main(String[] args) {
-        NavigableMap<Integer, String> map = new TreeMap<>();
-        map.put(10, "A");
-        map.put(30, "B");
-        map.put(50, "C");
-        NavigableSet<Integer> keys = map.navigableKeySet();
-        System.out.println("Original keys: " + keys);
-        System.out.println("Lower key for 30: " + keys.lower(30));    // 10
-        System.out.println("Higher key for 30: " + keys.higher(30));  // 50
-        System.out.println("Ceiling key for 30:" + keys.ceiling(30)); // 30
-        System.out.println("Floor key for 30: " + keys.floor(30));    // 30
-        System.out.println("Descending set: " + keys.descendingSet());
+        TreeMap<Integer, String> treeMap = new TreeMap<>();
+        treeMap.put(1, "One");
+        treeMap.put(2, "Two");
+        treeMap.put(3, "Three");
 
+        System.out.println("Original map: " + treeMap); // {1=One, 2=Two, 3=Three}
+
+        Map.Entry<Integer, String> firstEntry = treeMap.pollFirstEntry();
+        System.out.println("Polled first entry: " + firstEntry); // 1=One
+        System.out.println("Map after pollFirstEntry: " + treeMap); // {2=Two, 3=Three}
+
+        Map.Entry<Integer, String> lastEntry = treeMap.pollLastEntry();
+        System.out.println("Polled last entry: " + lastEntry); // 3=Three
+        System.out.println("Map after pollLastEntry: " + treeMap); // {2=Two}
+
+        Map.Entry<Integer, String> firstEntry2 = treeMap.firstEntry();
+        System.out.println("Polled last entry: " + firstEntry2);
+        System.out.println("Map after pollLastEntry: " + treeMap);
+
+        Map.Entry<Integer, String> lastEntry2 = treeMap.lastEntry();
+        System.out.println("Polled last entry: " + lastEntry2);
+        System.out.println("Map after pollLastEntry: " + treeMap);
 
     }
 
