@@ -1,7 +1,6 @@
 package project.java;
 
 import java.util.Arrays;
-import java.util.Map;
 import java.util.NavigableMap;
 import java.util.Set;
 import java.util.TreeMap;
@@ -16,15 +15,15 @@ public class App {
         map.put(10, "A");
         map.put(30, "B");
         map.put(50, "C");
-        System.out.println("lowerEntry(30): " + entryToString(map.lowerEntry(30)));    // 10=A
-        System.out.println("higherEntry(30): " + entryToString(map.higherEntry(30)));  // 50=C
-        System.out.println("ceilingEntry(30): " + entryToString(map.ceilingEntry(30))); // 30=B
-        System.out.println("floorEntry(30): " + entryToString(map.floorEntry(30)));    // 30=B
+        System.out.println("Original map: " + map);
+        //Original map: {10=A, 30=B, 50=C}
+        NavigableMap<Integer, String> descendingMap = map.descendingMap();
+        System.out.println("Descending map: " + descendingMap);
+        //Descending map: {50=C, 30=B, 10=A}
+
 
     }
-    private static String entryToString(Map.Entry<Integer, String> entry) {
-        return entry != null ? entry.getKey() + "=" + entry.getValue() : "null";
-    }
+
 
 
 //    public static void main(String[] args) {
