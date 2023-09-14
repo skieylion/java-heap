@@ -1,16 +1,23 @@
 package project.java;
 
 import lombok.Getter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
 @Repository("companyRepository")
+@Scope(BeanDefinition.SCOPE_SINGLETON)
 @Transaction
 public class CompanyRepository implements CrudRepository<Integer, Company> {
     @InjectBean
     private ConnectionPool connectionPool;
+
+    @Autowired
+    private MyThread myThread;
 
     @Getter
     @Value("#{systemProperties['user.country']}")
