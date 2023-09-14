@@ -1,7 +1,6 @@
 package project.java;
 
 import java.util.Arrays;
-import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
@@ -16,26 +15,15 @@ public class App {
         treeMap.put(2, "Two");
         treeMap.put(3, "Three");
 
-        System.out.println("Original map: " + treeMap); // {1=One, 2=Two, 3=Three}
+        System.out.println("Original map: " + treeMap.headMap(2));
+        System.out.println("Original map: " + treeMap.headMap(2, true));
+        System.out.println("Original map: " + treeMap.headMap(2, false));
+        System.out.println("Original map: " + treeMap.tailMap(2, true));
+        System.out.println("Original map: " + treeMap.tailMap(2, false));
+        System.out.println("Original map: " + treeMap.tailMap(2));
 
-        Map.Entry<Integer, String> firstEntry = treeMap.pollFirstEntry();
-        System.out.println("Polled first entry: " + firstEntry); // 1=One
-        System.out.println("Map after pollFirstEntry: " + treeMap); // {2=Two, 3=Three}
-
-        Map.Entry<Integer, String> lastEntry = treeMap.pollLastEntry();
-        System.out.println("Polled last entry: " + lastEntry); // 3=Three
-        System.out.println("Map after pollLastEntry: " + treeMap); // {2=Two}
-
-        Map.Entry<Integer, String> firstEntry2 = treeMap.firstEntry();
-        System.out.println("Polled last entry: " + firstEntry2);
-        System.out.println("Map after pollLastEntry: " + treeMap);
-
-        Map.Entry<Integer, String> lastEntry2 = treeMap.lastEntry();
-        System.out.println("Polled last entry: " + lastEntry2);
-        System.out.println("Map after pollLastEntry: " + treeMap);
 
     }
-
 
 
 //    public static void main(String[] args) {
