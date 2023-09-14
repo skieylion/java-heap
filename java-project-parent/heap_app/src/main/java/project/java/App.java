@@ -2,6 +2,7 @@ package project.java;
 
 import java.util.Arrays;
 import java.util.Set;
+import java.util.SortedMap;
 import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
@@ -10,19 +11,27 @@ import java.util.stream.Stream;
 public class App {
 
     public static void main(String[] args) {
-        TreeMap<Integer, String> treeMap = new TreeMap<>();
+        SortedMap<Integer, String> treeMap = new TreeMap<>();
         treeMap.put(1, "One");
         treeMap.put(4, "Three");
         treeMap.put(3, "Three");
         treeMap.put(2, "Two");
 
-        System.out.println("Original map: " + treeMap.headMap(2));
-        System.out.println("Original map: " + treeMap.headMap(2, true));
-        System.out.println("Original map: " + treeMap.headMap(2, false));
-        System.out.println("Original map: " + treeMap.tailMap(2, true));
-        System.out.println("Original map: " + treeMap.tailMap(2, false));
-        System.out.println("Original map: " + treeMap.subMap(2, true, 3, true));
-        System.out.println("Original map: " + treeMap.subMap(2, 3));
+        System.out.println("Original map: " + treeMap.headMap(2));//1
+        System.out.println("Original map: " + treeMap.tailMap(2));//2 3 4
+        System.out.println("comparator: " + treeMap.comparator());//null
+        System.out.println("last key: " + treeMap.lastKey());//1
+        System.out.println("first key: " + treeMap.firstKey());//4
+        System.out.println("sub map: " + treeMap.subMap(1, 4));//1 2 3
+        System.out.println("entry sets: " + treeMap.entrySet());//1 2 3 4
+        System.out.println("key sets: " + treeMap.keySet());//1 2 3 4
+
+//        System.out.println("Original map: " + treeMap.headMap(2, true));
+//        System.out.println("Original map: " + treeMap.headMap(2, false));
+//        System.out.println("Original map: " + treeMap.tailMap(2, true));
+//        System.out.println("Original map: " + treeMap.tailMap(2, false));
+//        System.out.println("Original map: " + treeMap.subMap(2, true, 3, true));
+//        System.out.println("Original map: " + treeMap.subMap(2, 3));
 
 
     }
