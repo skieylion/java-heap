@@ -2,6 +2,7 @@ package project.java;
 
 import java.util.Arrays;
 import java.util.NavigableMap;
+import java.util.NavigableSet;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
@@ -15,11 +16,13 @@ public class App {
         map.put(10, "A");
         map.put(30, "B");
         map.put(50, "C");
-        System.out.println("Original map: " + map);
-        //Original map: {10=A, 30=B, 50=C}
-        NavigableMap<Integer, String> descendingMap = map.descendingMap();
-        System.out.println("Descending map: " + descendingMap);
-        //Descending map: {50=C, 30=B, 10=A}
+        NavigableSet<Integer> keys = map.navigableKeySet();
+        System.out.println("Original keys: " + keys);
+        System.out.println("Lower key for 30: " + keys.lower(30));    // 10
+        System.out.println("Higher key for 30: " + keys.higher(30));  // 50
+        System.out.println("Ceiling key for 30:" + keys.ceiling(30)); // 30
+        System.out.println("Floor key for 30: " + keys.floor(30));    // 30
+        System.out.println("Descending set: " + keys.descendingSet());
 
 
     }
