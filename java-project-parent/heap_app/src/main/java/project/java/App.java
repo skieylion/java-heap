@@ -12,15 +12,17 @@ public class App {
     public static void main(String[] args) {
         TreeMap<Integer, String> treeMap = new TreeMap<>();
         treeMap.put(1, "One");
-        treeMap.put(2, "Two");
+        treeMap.put(4, "Three");
         treeMap.put(3, "Three");
+        treeMap.put(2, "Two");
 
         System.out.println("Original map: " + treeMap.headMap(2));
         System.out.println("Original map: " + treeMap.headMap(2, true));
         System.out.println("Original map: " + treeMap.headMap(2, false));
         System.out.println("Original map: " + treeMap.tailMap(2, true));
         System.out.println("Original map: " + treeMap.tailMap(2, false));
-        System.out.println("Original map: " + treeMap.tailMap(2));
+        System.out.println("Original map: " + treeMap.subMap(2, true, 3, true));
+        System.out.println("Original map: " + treeMap.subMap(2, 3));
 
 
     }
