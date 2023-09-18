@@ -1,6 +1,5 @@
-package project.java;
+package project.java.service;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public final class FacadeProperty {

@@ -1,4 +1,4 @@
-package project.java;
+package project.java.domain;
 
 import lombok.Getter;
 

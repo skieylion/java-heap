@@ -1,151 +1,51 @@
 package project.java;
 
-import java.util.Arrays;
-import java.util.Set;
-import java.util.SortedMap;
-import java.util.TreeMap;
-import java.util.TreeSet;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
 
 public class App {
 
+    private static final String SPACE = " ";
+    private static final String ZERO = "0";
+
     public static void main(String[] args) {
-        SortedMap<Integer, String> treeMap = new TreeMap<>();
-        treeMap.put(1, "One");
-        treeMap.put(4, "Three");
-        treeMap.put(3, "Three");
-        treeMap.put(2, "Two");
-
-        System.out.println("Original map: " + treeMap.headMap(2));//1
-        System.out.println("Original map: " + treeMap.tailMap(2));//2 3 4
-        System.out.println("comparator: " + treeMap.comparator());//null
-        System.out.println("last key: " + treeMap.lastKey());//1
-        System.out.println("first key: " + treeMap.firstKey());//4
-        System.out.println("sub map: " + treeMap.subMap(1, 4));//1 2 3
-        System.out.println("entry sets: " + treeMap.entrySet());//1 2 3 4
-        System.out.println("key sets: " + treeMap.keySet());//1 2 3 4
-
-//        System.out.println("Original map: " + treeMap.headMap(2, true));
-//        System.out.println("Original map: " + treeMap.headMap(2, false));
-//        System.out.println("Original map: " + treeMap.tailMap(2, true));
-//        System.out.println("Original map: " + treeMap.tailMap(2, false));
-//        System.out.println("Original map: " + treeMap.subMap(2, true, 3, true));
-//        System.out.println("Original map: " + treeMap.subMap(2, 3));
-
-
-    }
-
-
-//    public static void main(String[] args) {
-//        try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
-//            String expression = reader.readLine();
-//            char[] chars = expression.toCharArray();
-//            int i = 0, j = chars.length - 1;
-//            while (i < j) {
-//                if (!isValid(chars[i])) {
-//                    i++;
-//                } else if (!isValid(chars[j])) {
-//                    j--;
-//                } else if (Character.toLowerCase(chars[i]) == Character.toLowerCase(chars[j])) {
-//                    i++;
-//                    j--;
-//                } else {
-//                    System.out.println("False");
-//                    return;
-//                }
-//            }
-//            System.out.println("True");
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
-
-    static boolean isValid(char ch) {
-        return ch >= 'a' && ch <= 'z' || ch >= 'A' && ch <= 'Z' || ch >= '0' && ch <= '9';
-    }
-
-
-    static short[] neighbors(short[][] matrix, short n, short m, short x, short y) {
-        short s = 0;
-        short[] neighbors = new short[4];
-
-        if (x - 1 >= 0) {
-            neighbors[s++] = matrix[x - 1][y];
-        }
-        if (x + 1 < n) {
-            neighbors[s++] = matrix[x + 1][y];
-        }
-        if (y - 1 >= 0) {
-            neighbors[s++] = matrix[x][y - 1];
-        }
-        if (y + 1 < m) {
-            neighbors[s++] = matrix[x][y + 1];
-        }
-
-        return Arrays.copyOf(neighbors, s);
-    }
-
-    static void print(short[] neighbors) {
-        for (short neighbor : neighbors)
-            System.out.print(neighbor + " ");
-    }
-
-    public static int maxRepeating(String sequence, String word) {
-        int currentIndex = 0;
-        int index = 0;
-        int max = 0;
-        int offset = word.length();
-        while (index < sequence.length() && (currentIndex = sequence.indexOf(word, index)) > -1) {
-            int n = 0;
-            int startIndex = currentIndex;
-            int endIndex = currentIndex + offset;
-            do {
-                var sub = sequence.substring(startIndex, endIndex);
-                if (word.equals(sub)) {
-                    max = Math.max(++n, max);
-                } else {
-                    break;
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
+            int n = Integer.parseInt(reader.readLine());
+            StringTokenizer tokenizer = new StringTokenizer(reader.readLine());
+            StringBuilder builder = new StringBuilder(15_000_000);
+            int[] plots = new int[n];
+            int counter = -1;
+            int lastZeroIndex = 0;
+            for (int i = 0; i < n; i++) {
+                if (ZERO.equals(tokenizer.nextToken())) {
+                    counter = 1;
+                    lastZeroIndex = i;
+                    continue;
                 }
-                startIndex += offset;
-                endIndex += offset;
-            } while (endIndex <= sequence.length());
-            index = currentIndex + 1;
+                if (counter != -1) {
+                    plots[i] = counter++;
+                    continue;
+                }
+                plots[i] = n;
+            }
+            counter = -1;
+            for (int i = n - 1; i > -1; i--) {
+                if (plots[i] == 0) {
+                    counter = 1;
+                } else if (counter != -1) {
+                    if (counter < plots[i]) {
+                        plots[i] = counter++;
+                    } else {
+                        counter = -1;
+                    }
+                }
+                builder.insert(0, SPACE).insert(0, plots[i]);
+            }
+            System.out.print(builder);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
-        return max;
-    }
-
-//    public static void main(String[] args) {
-//        NavigableMap<Number, String> map = new TreeMap<>();
-//        map.put(1, "Simon");
-//        map.put(2, "Red");
-//        map.put(3, "White");
-//
-//        map.ceilingEntry(null);
-//
-//
-//        TreeMap<Integer, String> treeMap = new TreeMap<>();
-//        treeMap.put(1, "Karl");
-//        treeMap.put(3, "Simon");
-//        treeMap.put(2, "Pen");
-//        treeMap.put(10, "Alex");
-//
-//
-//        System.out.println(maxRepeating("aaabaaaabaaabaaaabaaaabaaaabaaaaba", "aaaba"));
-//    }
-
-    static void toCollection() {
-        Set<String> treeSet = Stream.of("D", "X", "F", "A").collect(Collectors.toCollection(TreeSet::new));
-        treeSet.forEach(System.out::print);
-        System.out.println();
-    }
-
-    static void joining() {
-        String symbols = Stream.of("D", "X", "F", "A").collect(Collectors.joining());
-        System.out.println(symbols);
-        String symbols2 = Stream.of("D", "X", "F", "A").collect(Collectors.joining("-"));
-        System.out.println(symbols2);
-        String symbols3 = Stream.of("D", "X", "F", "A").collect(Collectors.joining("-", "[", "]"));
-        System.out.println(symbols3);
     }
 }

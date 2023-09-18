@@ -1,4 +1,4 @@
-package project.java;
+package project.java.utils;
 
 import java.util.List;
 import java.util.Map;

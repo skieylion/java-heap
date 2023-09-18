@@ -1,4 +1,4 @@
-package project.java;
+package project.java.repository;
 
 import java.util.Optional;
 

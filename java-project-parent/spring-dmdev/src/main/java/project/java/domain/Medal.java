@@ -1,10 +1,11 @@
-package project.java;
+package project.java.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class Address {
-    String fullAddress;
+public class Medal {
+    String name;
+    String reason;
 }

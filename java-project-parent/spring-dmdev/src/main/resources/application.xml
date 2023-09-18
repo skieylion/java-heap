@@ -8,13 +8,13 @@
        http://www.springframework.org/schema/context/spring-context-4.0.xsd">
     <context:property-placeholder location="application.properties"/>
 
-    <context:component-scan base-package="project.java" annotation-config="true"/>
+<!--    <context:component-scan base-package="project.java" annotation-config="true"/>-->
 
 
     <bean id="driver" class="java.lang.String">
         <constructor-arg type="java.lang.String" value="PostgresDriver"/>
     </bean>
-    <bean id="pool1" name="p1,p2,p3" class="project.java.ConnectionPool">
+    <bean id="pool1" name="p1,p2,p3" class="project.java.utils.ConnectionPool">
         <constructor-arg name="username" type="java.lang.String" value="${db.driver}"/>
         <constructor-arg name="poolSize" type="java.lang.Integer" value="10"/>
         <constructor-arg name="args" type="java.util.List">
@@ -45,46 +45,46 @@
             </map>
         </property>
     </bean>
-    <bean class="org.springframework.beans.factory.config.CustomScopeConfigurer">
-        <property name="scopes">
-            <map>
-                <entry key="thread">
-                    <bean class="org.springframework.context.support.SimpleThreadScope"/>
-                </entry>
-            </map>
-        </property>
-    </bean>
+<!--    <bean class="org.springframework.beans.factory.config.CustomScopeConfigurer">-->
+<!--        <property name="scopes">-->
+<!--            <map>-->
+<!--                <entry key="thread">-->
+<!--                    <bean class="org.springframework.context.support.SimpleThreadScope"/>-->
+<!--                </entry>-->
+<!--            </map>-->
+<!--        </property>-->
+<!--    </bean>-->
 
-    <bean id="hero" class="project.java.Medal">
+    <bean id="hero" class="project.java.domain.Medal">
         <constructor-arg name="reason" value="MEDAL OF HONOR" type="java.lang.String"/>
         <constructor-arg name="name" value="HERO" type="java.lang.String"/>
     </bean>
-    <bean id="bravery" class="project.java.Medal">
+    <bean id="bravery" class="project.java.domain.Medal">
         <constructor-arg name="reason" value="MEDAL OF BRAVERY" type="java.lang.String"/>
         <constructor-arg name="name" value="BRAVERY" type="java.lang.String"/>
     </bean>
 
-    <bean id="book1" name="Shawshank" class="project.java.Book">
+    <bean id="book1" name="Shawshank" class="project.java.domain.Book">
         <constructor-arg index="0" value="Shawshank redemption" type="java.lang.String"/>
     </bean>
-    <bean id="book2" name="WarAndPeace" class="project.java.Book">
+    <bean id="book2" name="WarAndPeace" class="project.java.domain.Book">
         <constructor-arg index="0" value="War and Peace" type="java.lang.String"/>
     </bean>
-    <bean id="address" class="project.java.Address">
+    <bean id="address" class="project.java.domain.Address">
         <constructor-arg value="Kazan" type="java.lang.String"/>
     </bean>
 
-    <bean id="person1" name="Alex, Petrov" class="project.java.Person">
+    <bean id="person1" name="Alex, Petrov" class="project.java.domain.Person">
         <constructor-arg name="books">
             <set>
                 <ref bean="Shawshank"/>
-                <bean id="book3" name="RuslanAndLudmila" class="project.java.Book">
+                <bean id="book3" name="RuslanAndLudmila" class="project.java.domain.Book">
                     <constructor-arg value="Ruslan And Ludmila" type="java.lang.String"/>
                 </bean>
             </set>
         </constructor-arg>
         <constructor-arg name="address">
-            <bean class="project.java.Address">
+            <bean class="project.java.domain.Address">
                 <constructor-arg value="Moscow" type="java.lang.String"/>
             </bean>
         </constructor-arg>
@@ -95,7 +95,7 @@
         </property>
     </bean>
 
-    <bean id="person2" name="Simon, White" class="project.java.Person">
+    <bean id="person2" name="Simon, White" class="project.java.domain.Person">
         <constructor-arg name="books">
             <set>
                 <ref bean="WarAndPeace"/>
@@ -113,7 +113,7 @@
         <constructor-arg type="java.lang.String" value="AXPI5F"/>
     </bean>
 
-    <bean id="facadeProperty_AVSASDSA2" class="project.java.FacadeProperty" name="facade, property"
+    <bean id="facadeProperty_AVSASDSA2" class="project.java.service.FacadeProperty" name="facade, property"
           factory-method="of" init-method="init" destroy-method="destroy">
         <constructor-arg name="properties">
             <map>
