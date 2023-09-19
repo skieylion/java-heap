@@ -11,6 +11,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.SimpleThreadScope;
 import org.springframework.stereotype.Component;
 import project.java.repository.CrudRepository;
+import project.java.utils.ConnectionPool;
 import web.WebConfig;
 
 import java.util.HashMap;
@@ -18,7 +19,7 @@ import java.util.Map;
 
 @Import(WebConfig.class)
 @ImportResource("classpath:application.xml")
-@Configuration
+@Configuration(proxyBeanMethods = true)
 @ComponentScan(basePackages = "project.java",
         useDefaultFilters = false,
         includeFilters = {
@@ -30,8 +31,8 @@ import java.util.Map;
 public class JavaConfig {
 
     @Bean
-    public SimpleThreadScope simpleThreadScope(String httpVersion) {
-        System.out.println("HTTP :: " + httpVersion);
+    public SimpleThreadScope simpleThreadScope() {
+        //System.out.println("HTTP :: " + httpVersion);
         return new SimpleThreadScope();
     }
 
@@ -43,5 +44,18 @@ public class JavaConfig {
         customScopeConfigurer.setScopes(scopes);
         return customScopeConfigurer;
     }
+
+    @Bean
+    public ConnectionPool pool2() {
+        return new ConnectionPool("asd", 2);
+    }
+
+    @Bean
+    public ConnectionPool pool5() {
+        System.out.println("pool2=" + pool2());
+        System.out.println("pool2=" + pool2());
+        return new ConnectionPool("test", 5);
+    }
+
 
 }

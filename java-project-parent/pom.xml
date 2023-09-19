@@ -1,82 +1,82 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-  <groupId>project.java</groupId>
-  <artifactId>java-project-parent</artifactId>
-  <version>1.0-SNAPSHOT</version>
-  <modules>
-    <module>soap-server</module>
-    <module>soap-client</module>
-      <module>decorator</module>
-      <module>adapter</module>
-      <module>proxy</module>
-      <module>cof</module>
-      <module>demo</module>
-      <module>demo2</module>
-      <module>demo3</module>
-      <module>demo4</module>
-      <module>demomodule1</module>
-      <module>demomodule2</module>
-      <module>spring-security</module>
-      <module>feign</module>
-      <module>hystrix</module>
-      <module>hibernate1</module>
-      <module>adapter2</module>
-      <module>hibernate2</module>
-      <module>proxy2</module>
-      <module>opencv</module>
-      <module>chain_of_responsibility</module>
-    <module>hibernate3</module>
-      <module>factory_method</module>
-    <module>heap_app</module>
-    <module>abstract_factory</module>
-      <module>decorator2</module>
-      <module>builder</module>
-      <module>prototype</module>
-      <module>singleton</module>
-      <module>object_pool</module>
-      <module>filter</module>
-      <module>iterator</module>
-      <module>bridge</module>
-      <module>command</module>
-      <module>snapshot</module>
-      <module>state</module>
-      <module>strategy</module>
-    <module>demolesson</module>
-    <module>modulelesson1</module>
-    <module>modulelesson2</module>
-      <module>modulelesson3</module>
-      <module>thread-life-cycle</module>
-      <module>string-app</module>
-      <module>file-app</module>
-      <module>codewars</module>
-      <module>stream-api</module>
-      <module>design-patterns</module>
-      <module>collection-framework</module>
-      <module>mock-feign-service</module>
-      <module>jdbc-lessons</module>
-      <module>spring-dmdev</module>
-      <module>jdbc-home-project</module>
-  </modules>
+    <groupId>project.java</groupId>
+    <artifactId>java-project-parent</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>soap-server</module>
+        <module>soap-client</module>
+        <module>decorator</module>
+        <module>adapter</module>
+        <module>proxy</module>
+        <module>cof</module>
+        <module>demo</module>
+        <module>demo2</module>
+        <module>demo3</module>
+        <module>demo4</module>
+        <module>demomodule1</module>
+        <module>demomodule2</module>
+        <module>spring-security</module>
+        <module>feign</module>
+        <module>hystrix</module>
+        <module>hibernate1</module>
+        <module>adapter2</module>
+        <module>hibernate2</module>
+        <module>proxy2</module>
+        <module>opencv</module>
+        <module>chain_of_responsibility</module>
+        <module>hibernate3</module>
+        <module>factory_method</module>
+        <module>heap_app</module>
+        <module>abstract_factory</module>
+        <module>decorator2</module>
+        <module>builder</module>
+        <module>prototype</module>
+        <module>singleton</module>
+        <module>object_pool</module>
+        <module>filter</module>
+        <module>iterator</module>
+        <module>bridge</module>
+        <module>command</module>
+        <module>snapshot</module>
+        <module>state</module>
+        <module>strategy</module>
+        <module>demolesson</module>
+        <module>modulelesson1</module>
+        <module>modulelesson2</module>
+        <module>modulelesson3</module>
+        <module>thread-life-cycle</module>
+        <module>string-app</module>
+        <module>file-app</module>
+        <module>codewars</module>
+        <module>stream-api</module>
+        <module>design-patterns</module>
+        <module>collection-framework</module>
+        <module>mock-feign-service</module>
+        <module>jdbc-lessons</module>
+        <module>spring-dmdev</module>
+        <module>jdbc-home-project</module>
+    </modules>
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
     </properties>
 
-  <name>java-project-parent</name>
+    <name>java-project-parent</name>
 
-  <packaging>pom</packaging>
+    <packaging>pom</packaging>
 
-  <dependencies>
-    <dependency>
-      <groupId>org.projectlombok</groupId>
-      <artifactId>lombok</artifactId>
-      <version>1.18.24</version>
-      <scope>provided</scope>
-    </dependency>
-  </dependencies>
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.24</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
 
 </project>

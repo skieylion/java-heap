@@ -19,6 +19,10 @@ public class ConnectionPool {
         this.params = params;
     }
 
+    public ConnectionPool(String username, Integer poolSize) {
+        this(username, poolSize, null, null, null);
+    }
+
     public void setProperties(Map<String, Object> properties) {
         this.properties = properties;
     }

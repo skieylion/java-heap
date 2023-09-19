@@ -9,6 +9,7 @@ import org.springframework.util.ReflectionUtils;
 import project.java.annotation.InjectBean;
 
 import java.util.Arrays;
+
 @Component
 public class InjectBeanPostProcessor implements BeanPostProcessor, ApplicationContextAware {
     private ApplicationContext applicationContext;
@@ -17,6 +18,7 @@ public class InjectBeanPostProcessor implements BeanPostProcessor, ApplicationCo
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
         Arrays.stream(bean.getClass().getDeclaredFields())
                 .filter(field -> field.isAnnotationPresent(InjectBean.class))
+                .filter(field -> beanName.equals(field.getName()))
                 .forEach(field -> {
                     Object beanToObject = applicationContext.getBean(field.getType());
                     field.setAccessible(true);

@@ -14,37 +14,37 @@
     <bean id="driver" class="java.lang.String">
         <constructor-arg type="java.lang.String" value="PostgresDriver"/>
     </bean>
-    <bean id="pool1" name="p1,p2,p3" class="project.java.utils.ConnectionPool">
-        <constructor-arg name="username" type="java.lang.String" value="${db.driver}"/>
-        <constructor-arg name="poolSize" type="java.lang.Integer" value="10"/>
-        <constructor-arg name="args" type="java.util.List">
-            <list>
-                <value>--arg1=value1</value>
-                <value>--arg2=value2</value>
-            </list>
-        </constructor-arg>
-        <constructor-arg name="properties" type="java.util.Map">
-            <null/>
-        </constructor-arg>
-        <constructor-arg name="params" type="java.util.Set">
-            <set>
-                <value>Hello</value>
-                <value>World</value>
-                <ref bean="driver"/>
-            </set>
-        </constructor-arg>
-        <property name="properties">
-            <map>
-                <entry key="url" value="postgresql"/>
-                <entry key="password" value="123"/>
-                <entry key="driver" value="#{driver.substring(3)}"/>
-                <entry key="driver^2" value="#{T(Math).pow(driver.length(),2)}"/>
-                <entry key="hosts" value="#{'${db.hosts}'.split(',')}"/>
-                <entry key="user.home" value="#{systemProperties['user.home']}"/>
-                <entry key="model" value="#{systemEnvironment['sun.arch.data.model']}"/>
-            </map>
-        </property>
-    </bean>
+<!--    <bean id="pool1" name="p1,p2,p3" class="project.java.utils.ConnectionPool">-->
+<!--        <constructor-arg name="username" type="java.lang.String" value="${db.driver}"/>-->
+<!--        <constructor-arg name="poolSize" type="java.lang.Integer" value="10"/>-->
+<!--        <constructor-arg name="args" type="java.util.List">-->
+<!--            <list>-->
+<!--                <value>&#45;&#45;arg1=value1</value>-->
+<!--                <value>&#45;&#45;arg2=value2</value>-->
+<!--            </list>-->
+<!--        </constructor-arg>-->
+<!--        <constructor-arg name="properties" type="java.util.Map">-->
+<!--            <null/>-->
+<!--        </constructor-arg>-->
+<!--        <constructor-arg name="params" type="java.util.Set">-->
+<!--            <set>-->
+<!--                <value>Hello</value>-->
+<!--                <value>World</value>-->
+<!--                <ref bean="driver"/>-->
+<!--            </set>-->
+<!--        </constructor-arg>-->
+<!--        <property name="properties">-->
+<!--            <map>-->
+<!--                <entry key="url" value="postgresql"/>-->
+<!--                <entry key="password" value="123"/>-->
+<!--                <entry key="driver" value="#{driver.substring(3)}"/>-->
+<!--                <entry key="driver^2" value="#{T(Math).pow(driver.length(),2)}"/>-->
+<!--                <entry key="hosts" value="#{'${db.hosts}'.split(',')}"/>-->
+<!--                <entry key="user.home" value="#{systemProperties['user.home']}"/>-->
+<!--                <entry key="model" value="#{systemEnvironment['sun.arch.data.model']}"/>-->
+<!--            </map>-->
+<!--        </property>-->
+<!--    </bean>-->
 <!--    <bean class="org.springframework.beans.factory.config.CustomScopeConfigurer">-->
 <!--        <property name="scopes">-->
 <!--            <map>-->
@@ -125,6 +125,12 @@
                 <entry key="java.version" value="#{systemProperties['java.version']}"/>
                 <entry key="OS" value="#{systemEnvironment['OS']}"/>
                 <entry key="USERNAME" value="#{systemEnvironment['USERNAME']}"/>
+                <entry key="password" value="123"/>
+                <entry key="driver" value="#{driver.substring(3)}"/>
+                <entry key="driver^2" value="#{T(Math).pow(driver.length(),2)}"/>
+                <entry key="hosts" value="#{'${db.hosts}'.split(',')}"/>
+                <entry key="user.home" value="#{systemProperties['user.home']}"/>
+                <entry key="model" value="#{systemEnvironment['sun.arch.data.model']}"/>
             </map>
         </constructor-arg>
     </bean>
