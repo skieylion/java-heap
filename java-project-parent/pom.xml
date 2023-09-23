@@ -60,6 +60,7 @@
         <module>jdbc-lessons</module>
         <module>spring-dmdev</module>
         <module>jdbc-home-project</module>
+        <module>yandex-practicum</module>
     </modules>
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
