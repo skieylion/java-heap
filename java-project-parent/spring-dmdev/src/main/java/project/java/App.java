@@ -3,7 +3,7 @@ package project.java;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import project.java.config.JavaConfig;
 import project.java.domain.Medal;
-import project.java.repository.CrudRepository;
+import project.java.service.CompanyService;
 import project.java.service.MyThread;
 
 import java.util.Arrays;
@@ -26,8 +26,9 @@ public class App {
             var myThread = context.getBean("myThread", MyThread.class);
             System.out.println(myThread);
             var bean = context.getBean("hero", Medal.class);
-            var companyRepository = context.getBean("companyRepository", CrudRepository.class);
-            var company = companyRepository.findById(1);
+            var companyService = context.getBean(CompanyService.class);
+            var company = companyService.findById(1);
+            System.out.println(company);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }

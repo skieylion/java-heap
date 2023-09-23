@@ -1,28 +1,52 @@
 package project.java;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.EnumSet;
+import java.util.LinkedHashSet;
+import java.util.TreeSet;
 
 public class App {
 
+    enum Day {MONDAY, THUESDAY, SUNDAY}
+
+    EnumSet<Day> days = EnumSet.of(Day.MONDAY, Day.SUNDAY, Day.THUESDAY);
+
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int n = 2 * Integer.parseInt(scanner.nextLine());
-        Map<Integer, Integer> buttonMap = new HashMap<>();
-        for (int i = 0; i < 4; i++) {
-            var array = scanner.nextLine().split("");
-            for (var token : array) {
-                if (!".".equals(token)) {
-                    var key = Integer.valueOf(token);
-                    buttonMap.compute(key, (k, v) -> Objects.nonNull(v) ? v + 1 : 1);
-                }
+        ArrayList<Number> arrayList = new ArrayList<>();
+        arrayList.add(Integer.valueOf(2));
+
+
+        EnumSet<Day> enumSet = EnumSet.allOf(Day.class);
+        System.out.println(enumSet);
+        EnumSet<Day> enumSetCopy = EnumSet.copyOf(EnumSet.allOf(Day.class));
+        System.out.println(enumSetCopy);
+        EnumSet<Day> emptySet = EnumSet.noneOf(Day.class);
+        System.out.println(emptySet);
+        EnumSet<Day> rangeSet = EnumSet.range(Day.MONDAY, Day.THUESDAY);
+        System.out.println(rangeSet);
+        TreeSet<String> treeSet = new TreeSet<>();
+        treeSet.add("asd");
+        LinkedHashSet<Integer> linkedHashSet = new LinkedHashSet<>();
+    }
+
+    static String convert(String letters) {
+        if ("".equals(letters))
+            return "";
+        StringBuilder builder = new StringBuilder();
+        char letter = letters.charAt(0);
+        int count = 1;
+        for (int i = 1; i < letters.length(); i++) {
+            char symbol = letters.charAt(i);
+            if (letter != symbol) {
+                builder.append(count).append(letter);
+                count = 1;
+                letter = symbol;
+            } else {
+                count++;
             }
         }
-        long count = buttonMap.values().stream()
-                .filter(v -> v <= n)
-                .mapToInt(Integer::intValue).count();
-        System.out.println(count);
+        builder.append(count).append(letter);
+        return builder.toString();
     }
+
 }
