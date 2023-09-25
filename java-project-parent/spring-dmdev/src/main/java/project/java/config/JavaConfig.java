@@ -4,6 +4,7 @@ import org.springframework.beans.factory.config.CustomScopeConfigurer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.ImportResource;
@@ -28,6 +29,7 @@ import java.util.Map;
                 @ComponentScan.Filter(type = FilterType.REGEX, pattern = "com\\..+Repository")
         })
 @PropertySource("classpath:application.properties")
+@EnableAspectJAutoProxy
 public class JavaConfig {
 
     @Bean
@@ -56,6 +58,9 @@ public class JavaConfig {
         System.out.println("pool2=" + pool2());
         return new ConnectionPool("test", 5);
     }
-
+//    @Bean
+//    public LoggingAspect loggingAspect() {
+//        return new LoggingAspect();
+//    }
 
 }

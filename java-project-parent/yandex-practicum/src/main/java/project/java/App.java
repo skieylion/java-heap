@@ -1,47 +1,33 @@
 package project.java;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.math.RoundingMode;
 import java.util.Scanner;
 
 public class App {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        StringBuilder sequence = new StringBuilder(scanner.nextLine());
-        int i = 0, j = sequence.length() - 1;
-        while (sequence.length() > 0 && j >= 0) {
-            char symbol = sequence.charAt(j);
-            if (isLeftSymbol(symbol)) {
-                if (j + 1 < sequence.length()
-                        && symbol == reverse(sequence.charAt(j + 1))) {
-                    sequence.delete(j, j + 2);
-                } else {
-                    System.out.print("False");
-                    return;
-                }
-            }
-            j--;
-        }
-        if (sequence.length() > 0) {
-            System.out.print("False");
+        int n = scanner.nextInt();
+        int k = scanner.nextInt();
+
+        BigInteger sum = fib(n).add(fib(n - 1));
+        BigInteger pow = new BigInteger(String.valueOf((int) Math.pow(10, k)));
+        if (pow.compareTo(sum) > 0) {
+            System.out.print(sum);
         } else {
-            System.out.println("True");
+            System.out.print(sum.mod(pow));
         }
+        BeanException e;
     }
 
-    static boolean isLeftSymbol(char symbol) {
-        return symbol == '{' || symbol == '[' || symbol == '(';
-    }
-
-    static char reverse(char symbol) {
-        switch (symbol) {
-            case '}':
-                return '{';
-            case ']':
-                return '[';
-            case ')':
-                return '(';
-        }
-        throw new IllegalArgumentException("The symbol " + symbol + " is not valid");
+    static BigInteger fib(int n) {
+        double sqrt5 = Math.sqrt(5);
+        double phi = (1 + sqrt5) / 2;
+        double psi = (1 - sqrt5) / 2;
+        return BigDecimal.valueOf(phi).pow(n).subtract(BigDecimal.valueOf(psi).pow(n))
+                .divide(BigDecimal.valueOf(sqrt5), RoundingMode.CEILING).toBigInteger();
     }
 
 

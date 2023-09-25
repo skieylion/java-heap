@@ -11,7 +11,6 @@ import java.util.Arrays;
 
 public class App {
     public static void main(String[] args) {
-
         try (var context = new AnnotationConfigApplicationContext()) {
             context.register(JavaConfig.class);
             System.out.println(Arrays.toString(context.getEnvironment().getActiveProfiles()));
@@ -27,8 +26,9 @@ public class App {
             System.out.println(myThread);
             var bean = context.getBean("hero", Medal.class);
             var companyService = context.getBean(CompanyService.class);
-            var company = companyService.findById(1);
-            System.out.println(company);
+            //var company = companyService.findById(1);
+            companyService.todo();
+            //System.out.println(company);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
