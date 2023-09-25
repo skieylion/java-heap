@@ -15,6 +15,8 @@ public abstract class CompanyService {
     private final ApplicationEventPublisher publisher;
     private final CompanyService self;
 
+    //+++
+
     public CompanyService(ApplicationEventPublisher publisher, @Lazy CompanyService self) {
         this.publisher = publisher;
         this.self = self;
