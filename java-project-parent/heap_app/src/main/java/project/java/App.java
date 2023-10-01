@@ -1,52 +1,93 @@
 package project.java;
 
-import java.util.ArrayList;
-import java.util.EnumSet;
-import java.util.LinkedHashSet;
-import java.util.TreeSet;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
 
 public class App {
 
-    enum Day {MONDAY, THUESDAY, SUNDAY}
-
-    EnumSet<Day> days = EnumSet.of(Day.MONDAY, Day.SUNDAY, Day.THUESDAY);
+    private static final String NEW_LINE = "\r\n";
 
     public static void main(String[] args) {
-        ArrayList<Number> arrayList = new ArrayList<>();
-        arrayList.add(Integer.valueOf(2));
-
-
-        EnumSet<Day> enumSet = EnumSet.allOf(Day.class);
-        System.out.println(enumSet);
-        EnumSet<Day> enumSetCopy = EnumSet.copyOf(EnumSet.allOf(Day.class));
-        System.out.println(enumSetCopy);
-        EnumSet<Day> emptySet = EnumSet.noneOf(Day.class);
-        System.out.println(emptySet);
-        EnumSet<Day> rangeSet = EnumSet.range(Day.MONDAY, Day.THUESDAY);
-        System.out.println(rangeSet);
-        TreeSet<String> treeSet = new TreeSet<>();
-        treeSet.add("asd");
-        LinkedHashSet<Integer> linkedHashSet = new LinkedHashSet<>();
-    }
-
-    static String convert(String letters) {
-        if ("".equals(letters))
-            return "";
-        StringBuilder builder = new StringBuilder();
-        char letter = letters.charAt(0);
-        int count = 1;
-        for (int i = 1; i < letters.length(); i++) {
-            char symbol = letters.charAt(i);
-            if (letter != symbol) {
-                builder.append(count).append(letter);
-                count = 1;
-                letter = symbol;
-            } else {
-                count++;
+        StringBuilder sequence = new StringBuilder();
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
+            int n = Integer.parseInt(reader.readLine());
+            int m = Integer.parseInt(reader.readLine());
+            Deque deque = new Deque((char) m);
+            for (int i = 0; i < n; i++) {
+                StringTokenizer tokenizer = new StringTokenizer(reader.readLine());
+                String command = tokenizer.nextToken();
+                try {
+                    switch (command) {
+                        case "push_back":
+                            deque.addLast(Short.parseShort(tokenizer.nextToken()));
+                            break;
+                        case "push_front":
+                            deque.addFirst(Short.parseShort(tokenizer.nextToken()));
+                            break;
+                        case "pop_front":
+                            sequence.append(deque.pollFirst()).append(NEW_LINE);
+                            break;
+                        case "pop_back":
+                            sequence.append(deque.pollLast()).append(NEW_LINE);
+                            break;
+                    }
+                } catch (IndexOutOfBoundsException e) {
+                    sequence.append("error").append(NEW_LINE);
+                }
             }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
-        builder.append(count).append(letter);
-        return builder.toString();
+        System.out.println(sequence);
     }
+}
+
+class Deque {
+
+    private char head, tail;
+    private short[] elements;
+    private char counter;
+    private char size;
+
+    public Deque(char size) {
+        head = 0;
+        tail = (char) (size > 1 ? 1 : 0);
+        elements = new short[Character.MAX_VALUE + 1];
+        counter = 0;
+        this.size = size;
+    }
+
+    void addLast(short e) {
+        if (counter + 1 < size) {
+            elements[tail++] = e;
+            counter++;
+        } else throw new IndexOutOfBoundsException();
+    }
+
+    void addFirst(short e) {
+        if (counter + 1 < size) {
+            elements[head--] = e;
+            counter++;
+        } else throw new IndexOutOfBoundsException();
+    }
+
+    short pollLast() {
+        if (counter > 0) {
+            counter--;
+            return elements[--tail];
+        }
+        throw new IndexOutOfBoundsException();
+    }
+
+    short pollFirst() {
+        if (counter > 0) {
+            counter--;
+            return elements[++head];
+        }
+        throw new IndexOutOfBoundsException();
+    }
+
 
 }
