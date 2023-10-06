@@ -6,6 +6,7 @@ import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.BeanNameAware;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Lookup;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
@@ -13,8 +14,22 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
 public class TestService implements BeanNameAware, BeanFactoryAware, ApplicationContextAware, InitializingBean, DisposableBean {
+
+    @Lookup
+    public TestService self() {
+        return null;
+    }
+
     public void test() {
+        System.out.println("TestService lookup");
+        System.out.println(self());
+        System.out.println(self());
+        //self().todo();
         System.out.println("TestService");
+    }
+
+    public void todo() {
+        System.out.println("TestService todo");
     }
 
     @Override

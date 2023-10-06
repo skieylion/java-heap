@@ -10,10 +10,10 @@ import org.springframework.context.annotation.ImportResource;
 @Configuration
 @ImportResource("classpath:beans.xml")
 public class Config {
-    @Bean(value = "version")
-    public String version() {
-        return "1.2.3";
-    }
+//    @Bean(value = "version")
+//    public String version() {
+//        return "1.2.3";
+//    }
 
     @Bean
     public CustomBeanPostProcessor customBeanPostProcessor() {
@@ -29,4 +29,11 @@ public class Config {
     public TestService testService() {
         return new TestService();
     }
+
+//    @Bean(value = "testService2", initMethod = "customInitMethod", destroyMethod = "customDestroyMethod")
+//    public TestService testService2() {
+//        return new TestService();
+//    }
+
+
 }
