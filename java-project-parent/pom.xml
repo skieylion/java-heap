@@ -61,6 +61,7 @@
         <module>spring-dmdev</module>
         <module>jdbc-home-project</module>
         <module>yandex-practicum</module>
+        <module>spring-task-2</module>
     </modules>
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
