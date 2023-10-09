@@ -9,6 +9,7 @@ import org.springframework.context.annotation.FilterType;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.context.support.SimpleThreadScope;
 import org.springframework.stereotype.Component;
 import project.java.repository.CrudRepository;
@@ -58,6 +59,15 @@ public class JavaConfig {
         System.out.println("pool2=" + pool2());
         return new ConnectionPool("test", 5);
     }
+
+    @Bean
+    public ReloadableResourceBundleMessageSource messageSource() {
+        ReloadableResourceBundleMessageSource source = new ReloadableResourceBundleMessageSource();
+        source.setBasename("classpath:messages");
+        source.setDefaultEncoding("UTF-8");
+        return source;
+    }
+
 //    @Bean
 //    public LoggingAspect loggingAspect() {
 //        return new LoggingAspect();
