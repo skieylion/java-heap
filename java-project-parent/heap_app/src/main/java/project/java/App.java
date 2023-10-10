@@ -9,6 +9,8 @@ public class App {
     private static final String NEW_LINE = "\r\n";
 
     public static void main(String[] args) {
+        System.out.println(Integer.toString(0b0000_0001,2));
+
         StringBuilder sequence = new StringBuilder();
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
             int n = Integer.parseInt(reader.readLine());
