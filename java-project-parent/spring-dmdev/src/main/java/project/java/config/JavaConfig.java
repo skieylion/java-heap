@@ -1,6 +1,8 @@
 package project.java.config;
 
+import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.CustomScopeConfigurer;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -9,6 +11,7 @@ import org.springframework.context.annotation.FilterType;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.context.support.SimpleThreadScope;
 import org.springframework.stereotype.Component;
@@ -36,6 +39,8 @@ public class JavaConfig {
     @Bean
     public SimpleThreadScope simpleThreadScope() {
         //System.out.println("HTTP :: " + httpVersion);
+        PropertySourcesPlaceholderConfigurer s;
+        BeanFactoryPostProcessor bfpp;
         return new SimpleThreadScope();
     }
 
@@ -45,6 +50,7 @@ public class JavaConfig {
         Map<String, Object> scopes = new HashMap<>();
         scopes.put("thread", simpleThreadScope);
         customScopeConfigurer.setScopes(scopes);
+        SimpleThreadScope s;
         return customScopeConfigurer;
     }
 

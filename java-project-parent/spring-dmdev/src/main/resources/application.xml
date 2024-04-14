@@ -15,9 +15,9 @@
     <!--    <context:component-scan base-package="project.java" annotation-config="true"/>-->
 
 
-    <bean id="driver" class="java.lang.String">
-        <constructor-arg type="java.lang.String" value="PostgresDriver"/>
-    </bean>
+<!--    <bean id="driver" class="java.lang.String">-->
+<!--        <constructor-arg type="java.lang.String" value="PostgresDriver"/>-->
+<!--    </bean>-->
     <!--    <bean id="pool1" name="p1,p2,p3" class="project.java.utils.ConnectionPool">-->
     <!--        <constructor-arg name="username" type="java.lang.String" value="${db.driver}"/>-->
     <!--        <constructor-arg name="poolSize" type="java.lang.Integer" value="10"/>-->
@@ -61,11 +61,11 @@
 
     <bean id="hero" class="project.java.domain.Medal">
         <constructor-arg name="reason" value="MEDAL OF HONOR" type="java.lang.String"/>
-        <constructor-arg name="name" value="HERO" type="java.lang.String"/>
+        <constructor-arg name="userId" value="HERO" type="java.lang.String"/>
     </bean>
     <bean id="bravery" class="project.java.domain.Medal">
         <constructor-arg name="reason" value="MEDAL OF BRAVERY" type="java.lang.String"/>
-        <constructor-arg name="name" value="BRAVERY" type="java.lang.String"/>
+        <constructor-arg name="userId" value="BRAVERY" type="java.lang.String"/>
     </bean>
 
     <bean id="book1" name="Shawshank" class="project.java.domain.Book">
@@ -113,16 +113,16 @@
         </property>
     </bean>
 
-    <bean id="saltProperty" class="java.lang.String">
-        <constructor-arg type="java.lang.String" value="AXPI5F"/>
-    </bean>
+<!--    <bean id="saltProperty" class="java.lang.String">-->
+<!--        <constructor-arg type="java.lang.String" value="AXPI5F"/>-->
+<!--    </bean>-->
 
     <bean id="facadeProperty_AVSASDSA2" class="project.java.service.FacadeProperty" name="facade, property"
           factory-method="of" init-method="init" destroy-method="destroy">
         <constructor-arg name="properties">
             <map>
                 <entry key="url" value="${db.url}"/>
-                <entry key="salt" value-ref="saltProperty"/>
+<!--                <entry key="salt" value-ref="saltProperty"/>-->
                 <entry key="PI" value="#{T(Math).PI}"/>
                 <entry key="E" value="#{T(Math).E}"/>
                 <entry key="user.country" value="#{systemProperties['user.country']}"/>
@@ -130,8 +130,8 @@
                 <entry key="OS" value="#{systemEnvironment['OS']}"/>
                 <entry key="USERNAME" value="#{systemEnvironment['USERNAME']}"/>
                 <entry key="password" value="123"/>
-                <entry key="driver" value="#{driver.substring(3)}"/>
-                <entry key="driver^2" value="#{T(Math).pow(driver.length(),2)}"/>
+<!--                <entry key="driver" value="#{driver.substring(3)}"/>-->
+<!--                <entry key="driver^2" value="#{T(Math).pow(driver.length(),2)}"/>-->
                 <entry key="hosts" value="#{'${db.hosts}'.split(',')}"/>
                 <entry key="user.home" value="#{systemProperties['user.home']}"/>
                 <entry key="model" value="#{systemEnvironment['sun.arch.data.model']}"/>

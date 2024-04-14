@@ -1,95 +1,103 @@
 package project.java;
 
-import java.io.BufferedReader;
+
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.compress.compressors.lzma.LZMACompressorOutputStream;
+
+import java.io.BufferedOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.StringTokenizer;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
+@Slf4j
 public class App {
-    private static final String NEW_LINE = "\r\n";
-
     public static void main(String[] args) {
-        System.out.println(Integer.toString(0b0000_0001,2));
+        var source = Paths.get("C:\\tmp\\abc.txt");
+        var dest = Paths.get("C:\\tmp\\xyz");
+        zip(source, dest);
+    }
 
-        StringBuilder sequence = new StringBuilder();
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
-            int n = Integer.parseInt(reader.readLine());
-            int m = Integer.parseInt(reader.readLine());
-            Deque deque = new Deque(m);
-            for (int i = 0; i < n; i++) {
-                StringTokenizer tokenizer = new StringTokenizer(reader.readLine());
-                String command = tokenizer.nextToken();
+    public static void zip(Path source, Path dest) {
+        long beginTime = System.currentTimeMillis();
+        boolean var15 = false;
+
+        String var5;
+        long workTime;
+        label76:
+        {
+            try {
+                var15 = true;
+                InputStream inputStream = Files.newInputStream(source);
+
                 try {
-                    switch (command) {
-                        case "push_back":
-                            deque.pushBack(Integer.parseInt(tokenizer.nextToken()));
-                            break;
-                        case "push_front":
-                            deque.pushFront(Integer.parseInt(tokenizer.nextToken()));
-                            break;
-                        case "pop_front":
-                            sequence.append(deque.popFront()).append(NEW_LINE);
-                            break;
-                        case "pop_back":
-                            sequence.append(deque.popBack()).append(NEW_LINE);
-                            break;
+                    zipStream(dest, inputStream);
+                } catch (Throwable var17) {
+                    if (inputStream != null) {
+                        try {
+                            inputStream.close();
+                        } catch (Throwable var16) {
+                            var17.addSuppressed(var16);
+                        }
                     }
-                } catch (IndexOutOfBoundsException e) {
-                    sequence.append("error").append(NEW_LINE);
+
+                    throw var17;
+                }
+
+                if (inputStream != null) {
+                    inputStream.close();
+                    var15 = false;
+                } else {
+                    var15 = false;
+                }
+                break label76;
+            } catch (Exception var18) {
+                log.error("Zip error", var18);
+                var5 = "";
+                var15 = false;
+            } finally {
+                if (var15) {
                 }
             }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+
+            workTime = System.currentTimeMillis() - beginTime;
+            log.info("Файл {}, время сжатия {} ms", dest.toUri().toString(), workTime);
         }
-        System.out.println(sequence);
+
+        workTime = System.currentTimeMillis() - beginTime;
+        log.info("Файл {}, время сжатия {} ms", dest.toUri().toString(), workTime);
+    }
+
+    private static void zipStream(Path dest, InputStream inputStream) throws IOException, NoSuchAlgorithmException {
+        LZMACompressorOutputStream lzOut = new LZMACompressorOutputStream(new BufferedOutputStream(Files.newOutputStream(dest)));
+
+        String var7;
+        try {
+            MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
+            byte[] buffer = new byte[1024];
+
+            while (true) {
+                int length;
+                if (-1 == (length = inputStream.read(buffer))) {
+                    break;
+                }
+
+                lzOut.write(buffer, 0, length);
+                messageDigest.update(buffer, 0, length);
+            }
+        } catch (Throwable var9) {
+            try {
+                lzOut.close();
+            } catch (Throwable var8) {
+                var9.addSuppressed(var8);
+            }
+
+            throw var9;
+        }
+
+        lzOut.close();
     }
 }
-
-
-class Deque {
-    private final int[] elements;
-    private final int size;
-    private int head, tail;
-    private int counter;
-
-    Deque(int size) {
-        this.size = size;
-        this.elements = new int[size];
-        counter = 0;
-        head = 0;
-        tail = size > 1 ? 1 : 0;
-    }
-
-    void pushBack(int value) {
-        if (counter + 1 > size)
-            throw new IndexOutOfBoundsException();
-        elements[tail] = value;
-        tail = tail == size - 1 ? 0 : tail + 1;
-        counter++;
-    }
-
-    void pushFront(int value) {
-        if (counter + 1 > size)
-            throw new IndexOutOfBoundsException();
-        elements[head] = value;
-        head = head == 0 ? size - 1 : head - 1;
-        counter++;
-    }
-
-    int popBack() {
-        if (counter == 0)
-            throw new IndexOutOfBoundsException();
-        counter--;
-        tail = tail == 0 ? size - 1 : tail - 1;
-        return elements[tail];
-    }
-
-    int popFront() {
-        if (counter == 0)
-            throw new IndexOutOfBoundsException();
-        counter--;
-        head = head == size - 1 ? 0 : head + 1;
-        return elements[head];
-    }
-}
-

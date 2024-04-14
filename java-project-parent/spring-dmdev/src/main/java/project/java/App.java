@@ -16,11 +16,11 @@ import java.util.Locale;
 public class App {
     public static void main(String[] args) {
 
-        BeanFactory beanFactory = new XmlBeanFactory(new ClassPathResource("application.xml"));
-        var heroBean = beanFactory.getBean("hero", Medal.class);
-        var braveryBean = beanFactory.getBean("bravery", Medal.class);
-        System.out.println(heroBean);
-        System.out.println(braveryBean);
+        //BeanFactory beanFactory = new XmlBeanFactory(new ClassPathResource("application.xml"));
+        //var heroBean = beanFactory.getBean("hero", Medal.class);
+        //var braveryBean = beanFactory.getBean("bravery", Medal.class);
+        //System.out.println(heroBean);
+        //System.out.println(braveryBean);
         System.out.println("-----------------------");
         try (var context = new AnnotationConfigApplicationContext()) {
             context.register(JavaConfig.class);
@@ -28,14 +28,14 @@ public class App {
             context.getEnvironment().setActiveProfiles("prod", "web");
             context.refresh();
             System.out.println(Arrays.toString(context.getEnvironment().getActiveProfiles()));
-            new Thread(() -> {
-                var myThread = context.getBean("myThread", MyThread.class);
-                System.out.println(myThread);
-            }, "t1").start();
-            Thread.currentThread().join(1000);
-            var myThread = context.getBean("myThread", MyThread.class);
-            System.out.println(myThread);
-            var bean = context.getBean("hero", Medal.class);
+//            new Thread(() -> {
+//                var myThread = context.getBean("myThread", MyThread.class);
+//                System.out.println(myThread);
+//            }, "t1").start();
+//            Thread.currentThread().join(1000);
+            //var myThread = context.getBean("myThread", MyThread.class);
+            //System.out.println(myThread);
+            //var bean = context.getBean("hero", Medal.class);
             var companyService = context.getBean(CompanyService.class);
             //var company = companyService.findById(1);
             companyService.todo();
@@ -44,7 +44,7 @@ public class App {
             String englishGreetingRU = context.getMessage("greeting", null, Locale.forLanguageTag("ru"));
             System.out.println(englishGreetingRU);  // Output: Hello
             //System.out.println(company);
-        } catch (InterruptedException e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }

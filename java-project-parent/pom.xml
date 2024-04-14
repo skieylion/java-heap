@@ -62,6 +62,12 @@
         <module>jdbc-home-project</module>
         <module>yandex-practicum</module>
         <module>spring-task-2</module>
+        <module>cache-image</module>
+        <module>server-app</module>
+        <module>socket-app</module>
+        <module>concurrency-app</module>
+        <module>java-net-tcp-file</module>
+        <module>java-net-udp-sound</module>
     </modules>
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
@@ -79,6 +85,12 @@
             <version>1.18.24</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.5.3</version>
+        </dependency>
+
     </dependencies>
 
 </project>

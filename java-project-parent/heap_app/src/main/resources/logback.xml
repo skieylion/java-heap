@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="true" scan="true" scanPeriod="30 seconds">
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</Pattern>
+        </layout>
+    </appender>
+    <appender name="STDOUT2" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</Pattern>
+        </layout>
+    </appender>
+    <appender name="FILEROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <append>true</append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>application-%d{yyyy-MM-dd}-%i.log</fileNamePattern>
+            <maxFileSize>25GB</maxFileSize>
+            <maxHistory>4</maxHistory>
+            <totalSizeCap>100GB</totalSizeCap>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</Pattern>
+        </encoder>
+    </appender>
+    <appender name="GELF_INFO" class="de.siegmar.logbackgelf.GelfUdpAppender">
+        <graylogHost></graylogHost>
+        <graylogPort></graylogPort>
+    </appender>
+    <appender name="GELF_ERROR" class="de.siegmar.logbackgelf.GelfUdpAppender">
+        <graylogHost></graylogHost>
+        <graylogPort></graylogPort>
+    </appender>
+
+    <root level="info">
+        <appender-ref ref="FILEROLLING"/>
+    </root>
+
+</configuration>
