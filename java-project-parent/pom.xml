@@ -68,6 +68,8 @@
         <module>concurrency-app</module>
         <module>java-net-tcp-file</module>
         <module>java-net-udp-sound</module>
+        <module>java-net-http</module>
+        <module>stax</module>
     </modules>
     <properties>
         <maven.compiler.source>11</maven.compiler.source>

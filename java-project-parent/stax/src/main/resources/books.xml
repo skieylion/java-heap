@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<books>
+    <book>
+        <title>Java Programming</title>
+        <author>John Doe</author>
+        <price>29.95</price>
+    </book>
+    <book>
+        <title>XML Essentials</title>
+        <author>Jane Smith</author>
+        <price>19.95</price>
+    </book>
+</books>
