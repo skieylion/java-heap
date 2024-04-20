@@ -12,13 +12,27 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
+import java.util.List;
 
 @Slf4j
 public class App {
     public static void main(String[] args) {
+        List<String> names = Arrays.asList("Bob", "Sandra", "Mike", "John", "Mark");
+        var spliterator = names.spliterator();
+        System.out.println("sp1");
+        var sp1 = spliterator.trySplit();
+        sp1.forEachRemaining(System.out::println);
+        System.out.println("sp2");
+        var spliterator2 = spliterator.trySplit();
+        spliterator2.forEachRemaining(System.out::println);
+        System.out.println("sp3");
+        spliterator.forEachRemaining(System.out::println);
+
+        /*
         var source = Paths.get("C:\\tmp\\abc.txt");
         var dest = Paths.get("C:\\tmp\\xyz");
-        zip(source, dest);
+        zip(source, dest);*/
     }
 
     public static void zip(Path source, Path dest) {
