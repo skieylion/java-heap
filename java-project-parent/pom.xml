@@ -70,10 +70,13 @@
         <module>java-net-udp-sound</module>
         <module>java-net-http</module>
         <module>stax</module>
+        <module>mvc-1</module>
+        <module>free-marker</module>
+        <module>concurrency-tasks</module>
     </modules>
     <properties>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
     </properties>
 
     <name>java-project-parent</name>
